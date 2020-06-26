@@ -1,13 +1,9 @@
 {
-  "name": "renderer",
-  "version": "1.0.0",
-  "description": "",
-  "main": "src/index.html",
   "scripts": {
-    "start": "parcel serve src/index.html"
+    "start": "parcel serve src/index.html",
+    "build": "parcel build src/index.html",
+    "lint": "eslint ./src --fix"
   },
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "@material-ui/core": "^4.10.2",
     "@material-ui/icons": "^4.9.1",
@@ -15,15 +11,21 @@
     "chart.js": "^2.9.3",
     "clsx": "^1.1.1",
     "electron": "^9.0.5",
+    "jss": "^10.3.0",
     "jss-rtl": "^0.3.0",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-chartjs-2": "^2.9.0",
     "react-dom": "^16.13.1",
-    "react-router-dom": "^5.2.0",
-    "recharts": "^1.8.5"
+    "react-router-dom": "^5.2.0"
   },
   "devDependencies": {
+    "eslint": "7.2.0",
+    "eslint-config-airbnb": "^18.2.0",
+    "eslint-plugin-import": "^2.21.2",
+    "eslint-plugin-jsx-a11y": "^6.3.0",
+    "eslint-plugin-react": "^7.20.0",
+    "eslint-plugin-react-hooks": "^4",
     "parcel-bundler": "^1.12.4"
   }
 }

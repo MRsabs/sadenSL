@@ -13,7 +13,7 @@ const useStyles = makeStyles({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    flexDirection: 'column'
+    flexDirection: 'column',
   },
   title: {
     fontSize: 14,
@@ -30,7 +30,7 @@ export default function SimpleCard(props) {
     <Card className={classes.root}>
       <CardContent className={classes.content}>
         <Typography variant="h5" component="h2">
-         {props.title}
+          {props.title}
         </Typography>
         <Typography className={classes.pos} color="textSecondary">
           {numberWithCommas(props.amount)}

@@ -1,5 +1,6 @@
 import React from 'react';
-import {Line} from 'react-chartjs-2';
+import { Line } from 'react-chartjs-2';
+import PropTypes from 'prop-types';
 
 const data = {
   labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
@@ -23,16 +24,20 @@ const data = {
       pointHoverBorderWidth: 2,
       pointRadius: 5,
       pointHitRadius: 10,
-      data: [65, 59, 80, 81, 56, 55, 40]
-    }
-  ]
+      data: [65, 59, 80, 81, 56, 55, 40],
+    },
+  ],
 };
 
 export default function LineChart({ chartTitle }) {
-    return (
-        <div>
-          <h2>{ chartTitle }</h2>
-          <Line height={100} data={data} />
-        </div>
-      );
+  return (
+    <div>
+      <h2>{chartTitle}</h2>
+      <Line height={100} data={data} />
+    </div>
+  );
 }
+
+LineChart.prototype = {
+  chartTitle: PropTypes.string.isRequired,
+};

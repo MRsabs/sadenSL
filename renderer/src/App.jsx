@@ -6,6 +6,7 @@ import Appbar from './components/Appbar';
 import Sidebar from './components/Sidebar';
 
 import Home from './components/Home';
+import Bar from './components/Bar';
 
 const drawerWidth = 240;
 
@@ -77,7 +78,8 @@ export default function App() {
   return (
     <div className={classes.root}>
       <CssBaseline />
-      <Appbar open={open} setOpen={setOpen} />
+      <Appbar title="Some Title For This Page" open={open} setOpen={setOpen} />
+      {/* <Bar open={open} setOpen={setOpen} /> */}
       <Sidebar open={open} setOpen={setOpen} />
       <main className={classes.content}>
         <div className={classes.toolbar} />

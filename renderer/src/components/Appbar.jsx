@@ -6,6 +6,10 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
+import { Grid } from '@material-ui/core';
+import Badge from '@material-ui/core/Badge';
+import MailIcon from '@material-ui/icons/Mail';
+import NotificationsIcon from '@material-ui/icons/Notifications';
 
 const drawerWidth = 240;
 
@@ -69,9 +73,16 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     padding: theme.spacing(3),
   },
+  flexContainer: {
+    display: 'flex',
+    alignItems: 'center',
+  },
+  endOfFlex: {
+    justifyContent: 'end',
+  },
 }));
 
-export default function Appbar({ open, setOpen }) {
+export default function Appbar({ open, setOpen, title }) {
   const classes = useStyles();
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -84,22 +95,56 @@ export default function Appbar({ open, setOpen }) {
         [classes.appBarShift]: open,
       })}
     >
-      <Toolbar>
-        <IconButton
-          color="inherit"
-          aria-label="open drawer"
-          onClick={handleDrawerOpen}
-          edge="start"
-          className={clsx(classes.menuButton, {
-            [classes.hide]: open,
-          })}
-        >
-          <MenuIcon />
-        </IconButton>
-        <Typography variant="h6" noWrap>
-          Mini variant drawer
-        </Typography>
+      <Toolbar className={classes.flexContainer}>
+        <Grid container>
+          <Grid className={classes.flexContainer} item xs={6}>
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              onClick={handleDrawerOpen}
+              edge="start"
+              className={clsx(classes.menuButton, {
+                [classes.hide]: open,
+              })}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Typography variant="h5">{title}</Typography>
+          </Grid>
+          <Grid
+            className={clsx(classes.flexContainer, classes.endOfFlex)}
+            item
+            xs={6}
+          >
+            <IconButton aria-label="show 4 new mails" color="inherit">
+              <Badge badgeContent={4} color="secondary">
+                <MailIcon />
+              </Badge>
+            </IconButton>
+            <IconButton aria-label="show 17 new notifications" color="inherit">
+              <Badge badgeContent={17} color="secondary">
+                <NotificationsIcon />
+              </Badge>
+            </IconButton>
+          </Grid>
+        </Grid>
       </Toolbar>
     </AppBar>
   );
+}
+{
+  /* <IconButton
+color="inherit"
+aria-label="open drawer"
+onClick={handleDrawerOpen}
+edge="start"
+className={clsx(classes.menuButton, {
+  [classes.hide]: open,
+})}
+>
+<MenuIcon />
+</IconButton>
+<Typography variant="h6" noWrap>
+Mini variant drawer
+</Typography> */
 }

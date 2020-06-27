@@ -33,7 +33,7 @@ export default function LineChart({ chartTitle }) {
   return (
     <div>
       <h2>{chartTitle}</h2>
-      <Line height={100} data={data} />
+      <Line height={140} data={data} />
     </div>
   );
 }

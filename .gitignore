@@ -2,3 +2,7 @@ node_modules
 sadensl.sqlite
 renderer/node_modules
 renderer/dist
+databse.sqlite
+addon/node_modules
+addon/native/target
+addon/index.node

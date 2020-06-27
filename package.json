@@ -10,7 +10,7 @@
   },
   "repository": "https://github.com/MRsabS/sadanSL",
   "author": "Qatara",
-  "license": "CC0-1.0",
+  "license": "LicenseRef-LICENSE",
   "devDependencies": {
     "cross-spawn": "^7.0.3",
     "electron": "^9.0.5",

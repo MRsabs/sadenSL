@@ -1,7 +1,7 @@
 {
   "scripts": {
-    "start": "parcel serve src/index.html",
-    "build": "parcel build src/index.html",
+    "start": "parcel watch src/index.html  --target electron --public-url ./",
+    "build": "parcel build src/index.html  --target electron --public-url ./",
     "lint": "eslint ./src --fix"
   },
   "dependencies": {
@@ -11,6 +11,7 @@
     "chart.js": "^2.9.3",
     "clsx": "^1.1.1",
     "electron": "^9.0.5",
+    "electron-better-ipc": "^1.1.0",
     "jss": "^10.3.0",
     "jss-rtl": "^0.3.0",
     "prop-types": "^15.7.2",
@@ -20,6 +21,7 @@
     "react-router-dom": "^5.2.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.10.3",
     "eslint": "7.2.0",
     "eslint-config-airbnb": "^18.2.0",
     "eslint-plugin-import": "^2.21.2",

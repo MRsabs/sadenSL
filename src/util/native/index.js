@@ -1,15 +1,17 @@
 var addon = require('./index.node');
-
+/**
+ * @returns {string}
+ */
 function hello() {
   return addon.hello();
 }
 
 /**
- * @param {string} num
+ * @param {string} x
  * @returns {string}
  */
-function nwc(num) {
-  return addon.nwc(num);
+function nwc(x) {
+  return addon.nwc(x.toString());
 }
 
 module.exports = {

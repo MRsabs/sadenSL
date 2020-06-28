@@ -5,6 +5,7 @@ dependencies:
   chart.js: 2.9.3
   clsx: 1.1.1
   electron: 9.0.5
+  electron-better-ipc: 1.1.0
   jss: 10.3.0
   jss-rtl: 0.3.0_jss@10.3.0
   prop-types: 15.7.2
@@ -13,6 +14,7 @@ dependencies:
   react-dom: 16.13.1_react@16.13.1
   react-router-dom: 5.2.0_react@16.13.1
 devDependencies:
+  '@babel/core': 7.10.3
   eslint: 7.2.0
   eslint-config-airbnb: 18.2.0_4a2a07ab5f0eea258e3b4975c337b984
   eslint-plugin-import: 2.21.2_eslint@7.2.0
@@ -2841,6 +2843,12 @@ packages:
     dev: true
     resolution:
       integrity: sha1-WQxhFWsK4vTwJVcyoViyZrxWsh0=
+  /electron-better-ipc/1.1.0:
+    dependencies:
+      serialize-error: 5.0.0
+    dev: false
+    resolution:
+      integrity: sha512-f+vNMAmSOWycmmW6+DCGkq5Y8Cgod9RyvgCKVmci+dxK+xF5iUAXJlriLJM5CKhxeC6b8dI52vkblXaeHsTGlA==
   /electron-to-chromium/1.3.481:
     dev: true
     resolution:
@@ -6578,6 +6586,14 @@ packages:
       node: '>= 0.8.0'
     resolution:
       integrity: sha512-BsVKsiGcQMFwT8UxypobUKyv7irCNRHk1T0G680vk88yf6LBByGcZJOTJCrTP2xVN6yI+XjPJcNuE3V4fT9sAg==
+  /serialize-error/5.0.0:
+    dependencies:
+      type-fest: 0.8.1
+    dev: false
+    engines:
+      node: '>=8'
+    resolution:
+      integrity: sha512-/VtpuyzYf82mHYTtI4QKtwHa79vAdU5OQpNPAmE/0UDdlGT0ZxHwC+J6gXkw29wwoVI8fMPsfcVHOwXtUQYYQA==
   /serialize-error/7.0.1:
     dependencies:
       type-fest: 0.13.1
@@ -7290,7 +7306,6 @@ packages:
     resolution:
       integrity: sha512-34R7HTnG0XIJcBSn5XhDd7nNFPRcXYRZrBB2O2jdKqYODldSzBAqzsWoZYYvduky73toYS/ESqxPvkDf/F0XMg==
   /type-fest/0.8.1:
-    dev: true
     engines:
       node: '>=8'
     resolution:
@@ -7659,12 +7674,14 @@ packages:
     resolution:
       integrity: sha1-x+sXyT4RLLEIb6bY5R+wZnt5pfk=
 specifiers:
+  '@babel/core': ^7.10.3
   '@material-ui/core': ^4.10.2
   '@material-ui/icons': ^4.9.1
   '@nivo/line': ^0.62.0
   chart.js: ^2.9.3
   clsx: ^1.1.1
   electron: ^9.0.5
+  electron-better-ipc: ^1.1.0
   eslint: 7.2.0
   eslint-config-airbnb: ^18.2.0
   eslint-plugin-import: ^2.21.2

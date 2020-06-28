@@ -6,7 +6,7 @@ import Appbar from './components/Appbar';
 import Sidebar from './components/Sidebar';
 
 import Home from './components/Home';
-import Bar from './components/Bar';
+// import Bar from './components/Bar';
 
 const drawerWidth = 240;
 

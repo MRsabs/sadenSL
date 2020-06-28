@@ -9,7 +9,7 @@ fn nwc(mut cx: FunctionContext) -> JsResult<JsString> {
 }
 
 fn hello(mut cx: FunctionContext) -> JsResult<JsString> {
-    Ok(cx.string("hello node"))
+    Ok(cx.string("from rust"))
 }
 
 register_module!(mut m, {

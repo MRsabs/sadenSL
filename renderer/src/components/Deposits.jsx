@@ -3,7 +3,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
-import numberWithCommas from '../utils/numberWithCommas';
 
 const useStyles = makeStyles({
   root: {
@@ -33,7 +32,7 @@ export default function SimpleCard(props) {
           {props.title}
         </Typography>
         <Typography className={classes.pos} color="textSecondary">
-          {numberWithCommas(props.amount)}
+          {props.amount}
         </Typography>
       </CardContent>
     </Card>

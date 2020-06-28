@@ -13,4 +13,4 @@ spawn.sync('npm', ['run', 'build'], {
 });
 
 fs.removeSync(addonFileElectron);
-fs.moveSync(addonFile, addonDirElectron);
+fs.copySync(addonFile, addonFileElectron);

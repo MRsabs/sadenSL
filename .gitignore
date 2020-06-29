@@ -3,6 +3,9 @@ sadensl.sqlite
 renderer/node_modules
 renderer/dist
 addon/node_modules
-addon/native/target
 addon/index.node
+addon/native/target
+addon/native/artifacts.json
+addon/**/.DS_Store
+
 .cache

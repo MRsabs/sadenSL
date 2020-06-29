@@ -7,6 +7,5 @@ addon/index.node
 addon/native/target
 addon/native/artifacts.json
 addon/**/.DS_Store
-
 .cache
 dist

@@ -21,8 +21,18 @@ function unixNow() {
   return addon.unixNow();
 }
 
+/**
+ * @returns {string}
+ */
+function uuidV4() {
+  return addon.uuidV4();
+}
+
+console.log(uuidV4());
+
 module.exports = {
   nwc,
   hello,
   unixNow,
+  uuidV4,
 };

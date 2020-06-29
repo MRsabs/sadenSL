@@ -4,6 +4,7 @@
     "neon-cli": "^0.4.0"
   },
   "scripts": {
-    "build": "electron-build-env neon build --release"
+    "development": "electron-build-env neon build",
+    "production": "electron-build-env neon build --release"
   }
 }

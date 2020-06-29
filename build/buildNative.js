@@ -7,7 +7,7 @@ const addonFile = Path.join(__dirname, '../addon/native/index.node');
 const addonDirElectron = Path.join(__dirname, '../src/util/native/');
 const addonFileElectron = Path.join(__dirname, '../src/util/native/index.node');
 
-spawn.sync('npm', ['run', 'build'], {
+spawn.sync('npm', ['run', process.env.NODE_ENV], {
   stdio: 'inherit',
   cwd: addonDir,
 });

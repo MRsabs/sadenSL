@@ -5,3 +5,4 @@ renderer/dist
 addon/node_modules
 addon/native/target
 addon/index.node
+.cache

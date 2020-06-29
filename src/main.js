@@ -1,7 +1,7 @@
 import { app, BrowserWindow, ipcMain } from 'electron';
 import * as path from 'path';
 import * as isDev from 'electron-is-dev';
-import seq from './db/init2';
+import seq from './db/init';
 
 function createWindow() {
   const mainWindow = new BrowserWindow({

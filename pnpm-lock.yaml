@@ -5,6 +5,7 @@ dependencies:
   module-alias: 2.2.2
   sequelize: 6.2.2
   sqlite3: 4.2.0
+  webpack-node-externals: 1.7.2
 devDependencies:
   '@babel/core': 7.10.3
   '@babel/plugin-transform-runtime': 7.10.3_@babel+core@7.10.3
@@ -5623,6 +5624,10 @@ packages:
       webpack: 4.x.x
     resolution:
       integrity: sha512-NVWBaz9k839ZH/sinurM+HcDvJOTXwSjYp1ku+5XKeOC03z8v5QitnK/x+lAxGXFyhdayoIf/GOpv85z3/xPag==
+  /webpack-node-externals/1.7.2:
+    dev: false
+    resolution:
+      integrity: sha512-ajerHZ+BJKeCLviLUUmnyd5B4RavLF76uv3cs6KNuO8W+HuQaEs0y0L7o40NQxdPy5w0pcv8Ew7yPUAQG0UdCg==
   /webpack-sources/1.4.3:
     dependencies:
       source-list-map: 2.0.1
@@ -5845,3 +5850,4 @@ specifiers:
   typescript: ^3.9.5
   webpack: ^4.43.0
   webpack-cli: ^3.3.12
+  webpack-node-externals: ^1.7.2

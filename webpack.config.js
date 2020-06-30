@@ -11,6 +11,15 @@ module.exports = {
   entry: Path.join(__dirname, './src/main.js'),
   module: {
     rules: [
+      {
+        enforce: 'pre',
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: 'eslint-loader',
+        options: {
+          fix: true,
+        },
+      },
       { test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader' },
       {
         test: /\.node$/,

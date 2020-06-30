@@ -1,13 +1,14 @@
-import sequelize from '../init';
+/* eslint-disable max-classes-per-file */
 import { Model, DataTypes } from 'sequelize';
-import { unixNow, uuidV4 } from '../../util/native.js';
+import sequelize from '../init';
+import { unixNow, uuidV4 } from '../../util/native';
 
 export class Customer extends Model {}
 Customer.init(
   {
     id: {
       type: DataTypes.UUIDV4,
-      defaultValue: function () {
+      defaultValue() {
         return uuidV4();
       },
       primaryKey: true,
@@ -17,18 +18,18 @@ Customer.init(
     },
     createdAt: {
       type: 'TIMESTAMP',
-      defaultValue: function () {
+      defaultValue() {
         return unixNow();
       },
     },
     updatedAt: {
       type: 'TIMESTAMP',
-      defaultValue: function () {
+      defaultValue() {
         return unixNow();
       },
     },
   },
-  { sequelize, modelName: 'customer' }
+  { sequelize, modelName: 'customer' },
 );
 
 export class Order extends Model {}
@@ -36,7 +37,7 @@ Order.init(
   {
     id: {
       type: DataTypes.UUIDV4,
-      defaultValue: function () {
+      defaultValue() {
         return uuidV4();
       },
       primaryKey: true,
@@ -49,18 +50,18 @@ Order.init(
     },
     createdAt: {
       type: 'TIMESTAMP',
-      defaultValue: function () {
+      defaultValue() {
         return unixNow();
       },
     },
     updatedAt: {
       type: 'TIMESTAMP',
-      defaultValue: function () {
+      defaultValue() {
         return unixNow();
       },
     },
   },
-  { sequelize, modelName: 'order' }
+  { sequelize, modelName: 'order' },
 );
 
 Customer.hasMany(Order);

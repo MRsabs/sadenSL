@@ -28,9 +28,10 @@ module.exports = {
     ],
   },
   output: {
-    path: __dirname + '/dist',
+    path: Path.join(__dirname, '/dist'),
   },
   resolve: {
     extensions: ['.wasm', '.js', '.ts', '.json', '.node'],
   },
+  watch: true,
 };

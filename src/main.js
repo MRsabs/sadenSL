@@ -1,40 +1,39 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { app, BrowserWindow } from 'electron';
-import * as path from 'path';
-import * as isDev from 'electron-is-dev';
-// eslint-disable-next-line no-unused-vars
-import seq from './db/init';
+import { app } from 'electron';
+import * as db from './db/init';
+import createWindow from './helpers/createWindow';
 
-function createWindow() {
-  const mainWindow = new BrowserWindow({
-    width: 1280,
-    height: 720,
-    show: true,
-    webPreferences: {
-      nodeIntegration: true,
-      nodeIntegrationInWorker: true,
-    },
-  });
-
-  if (isDev) {
-    mainWindow.loadURL('http://localhost:8080');
-    mainWindow.webContents.openDevTools();
-  } else {
-    mainWindow.loadFile(path.join(__dirname, '../renderer/dist/index.html'));
+app.whenReady().then(async () => {
+  try {
+    if (
+      (await db.authenticateDb()) &&
+      (await db.syncDb()) &&
+      (await db.testDb())
+    ) {
+      const window = createWindow({
+        width: 1280,
+        height: 720,
+        show: false,
+        webPreferences: {
+          nodeIntegration: true,
+          nodeIntegrationInWorker: true,
+        },
+      });
+      window.webContents.on('dom-ready', () => window.show());
+    } else {
+      const errorBox = (await import('./helpers/error')).default;
+      const title = 'Something weng Wrong';
+      const content = 'Try to reinstall the lastest version of the SadanSl';
+      errorBox(title, content);
+      app.quit();
+    }
+  } catch (error) {
+    // TODO handle with user-friendly message
+    app.exit(1);
   }
-  return mainWindow;
-}
-
-app.whenReady().then(() => {
-  const window = createWindow();
-  // eslint-disable-next-line no-console
-  window.webContents.on('dom-ready', () => console.log('dom is ready'));
-
-  app.on('activate', () => {
-    if (BrowserWindow.getAllWindows().length === 0) createWindow();
-  });
 });
-
-app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') app.quit();
-});
+// app.on('activate', () => {
+//   if (BrowserWindow.getAllWindows().length === 0) createWindow();
+// });
+// app.on('window-all-closed', () => {
+//   if (process.platform !== 'darwin') app.quit();
+// });

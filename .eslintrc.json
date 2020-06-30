@@ -6,6 +6,11 @@
     "plugins": [
         "prettier"
     ],
+    "parser": "babel-eslint",
+    "parserOptions": {
+        "sourceType": "module",
+        "allowImportExportEverywhere": true
+    },
     "rules": {
         "prettier/prettier": "error",
         "import/no-extraneous-dependencies": [
@@ -14,10 +19,5 @@
                 "devDependencies": true
             }
         ]
-    },
-    "parser": "babel-eslint",
-    "parserOptions": {
-        "sourceType": "module",
-        "allowImportExportEverywhere": true
     }
 }

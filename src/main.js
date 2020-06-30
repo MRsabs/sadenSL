@@ -14,7 +14,9 @@ function createWindow() {
     },
   });
 
-  mainWindow.loadFile(path.join(__dirname, '../renderer/dist/index.html'));
+  idDev
+    ? mainWindow.loadURL('http://localhost:8080')
+    : mainWindow.loadFile(path.join(__dirname, '../renderer/dist/index.html'));
   isDev ? mainWindow.webContents.openDevTools() : null;
   return mainWindow;
 }

@@ -15,6 +15,7 @@ dependencies:
   react-router-dom: 5.2.0_react@16.13.1
 devDependencies:
   '@babel/core': 7.10.3
+  '@babel/plugin-proposal-class-properties': 7.10.1_@babel+core@7.10.3
   eslint: 7.2.0
   eslint-config-airbnb: 18.2.0_4a2a07ab5f0eea258e3b4975c337b984
   eslint-plugin-import: 2.21.2_eslint@7.2.0
@@ -22,6 +23,7 @@ devDependencies:
   eslint-plugin-react: 7.20.0_eslint@7.2.0
   eslint-plugin-react-hooks: 4.0.4_eslint@7.2.0
   parcel-bundler: 1.12.4
+  parcel-plugin-wasm-pack: 6.0.1_parcel-bundler@1.12.4
 lockfileVersion: 5.1
 packages:
   /@babel/code-frame/7.10.3:
@@ -5336,6 +5338,20 @@ packages:
     requiresBuild: true
     resolution:
       integrity: sha512-G+iZGGiPEXcRzw0fiRxWYCKxdt/F7l9a0xkiU4XbcVRJCSlBnioWEwJMutOCCpoQmaQtjB4RBHDGIHN85AIhLQ==
+  /parcel-plugin-wasm-pack/6.0.1_parcel-bundler@1.12.4:
+    dependencies:
+      '@iarna/toml': 2.2.5
+      '@parcel/fs': 1.11.0
+      '@parcel/logger': 1.11.1
+      command-exists: 1.2.9
+      parcel-bundler: 1.12.4
+    dev: true
+    engines:
+      node: '>=10'
+    peerDependencies:
+      parcel-bundler: 1.12.4
+    resolution:
+      integrity: sha512-b9sGtTxtCxPX67HQTVEDiqqq0rnjur/Ru/XvmGfZRg84cHTa2X+4RovLOERWPVxZAGxALeLfojh1AscKNwjCZQ==
   /parent-module/1.0.1:
     dependencies:
       callsites: 3.1.0
@@ -7675,6 +7691,7 @@ packages:
       integrity: sha1-x+sXyT4RLLEIb6bY5R+wZnt5pfk=
 specifiers:
   '@babel/core': ^7.10.3
+  '@babel/plugin-proposal-class-properties': ^7.10.1
   '@material-ui/core': ^4.10.2
   '@material-ui/icons': ^4.9.1
   '@nivo/line': ^0.62.0
@@ -7691,6 +7708,7 @@ specifiers:
   jss: ^10.3.0
   jss-rtl: ^0.3.0
   parcel-bundler: ^1.12.4
+  parcel-plugin-wasm-pack: ^6.0.1
   prop-types: ^15.7.2
   react: ^16.13.1
   react-chartjs-2: ^2.9.0

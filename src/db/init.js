@@ -15,7 +15,7 @@ const sequelize = new Sequelize({
 (async function () {
   try {
     await sequelize.authenticate();
-    const models = await import('./models/model');
+    const models = await import('./models/index');
     await sequelize.sync({ alter: { drop: false } });
     const jane = await models.Customer.create({
       name: 'james',

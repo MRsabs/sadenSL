@@ -3,7 +3,7 @@ import Grid from '@material-ui/core/Grid';
 import { Container } from '@material-ui/core';
 import SimpleCard from './Deposits';
 import LineChart from './charts/LineChart';
-import numberWithCommas from '../utils/numberWithCommas';
+import numberWithCommas from '@utils/numberWithCommas';
 
 export default class Home extends Component {
   state = {

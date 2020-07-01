@@ -2,8 +2,8 @@ import { Model, DataTypes } from 'sequelize';
 import sequelize from '../init';
 import { unixNow, uuidV4 } from '../../util/native';
 
-class Customer extends Model {}
-Customer.init(
+class OrderProduct extends Model {}
+OrderProduct.init(
   {
     id: {
       type: DataTypes.STRING,
@@ -12,16 +12,14 @@ Customer.init(
       },
       primaryKey: true,
     },
-    name: {
-      type: DataTypes.STRING(50),
-    },
-    phone: {
-      type: DataTypes.NUMBER({ length: 16 }),
-      defaultValue: 0,
-    },
-    address: {
+    orderId: {
       type: DataTypes.STRING,
-      defaultValue: 'unknown',
+    },
+    productId: {
+      type: DataTypes.STRING,
+    },
+    quantity: {
+      type: DataTypes.NUMBER,
     },
     createdAt: {
       type: 'TIMESTAMP',
@@ -36,7 +34,7 @@ Customer.init(
       },
     },
   },
-  { sequelize, modelName: 'customer' },
+  { sequelize, modelName: 'orderProduct' },
 );
 
-export default Customer;
+export default OrderProduct;

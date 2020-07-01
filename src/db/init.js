@@ -4,7 +4,7 @@ const { app } = require('electron');
 const isDev = require('electron-is-dev');
 
 const sequelize = new Sequelize({
-  logging: false,
+  logging: true,
   dialect: 'sqlite',
   storage: isDev
     ? path.join(process.cwd(), 'sadensl.sqlite')
@@ -13,16 +13,48 @@ const sequelize = new Sequelize({
 
 export async function testDb() {
   try {
+    return true;
+    // eslint-disable-next-line no-unreachable
     const models = await import('./models/index');
-    const tCustomer = await models.Customer.create({ name: 'james' });
-    await models.Order.create({
-      customerId: tCustomer.getDataValue('id'),
-      product: 'someProduct',
+    const product = await models.Product.create({
+      name: 'prodcut 1',
+      wholeSalePrice: 100,
+      retailPrice: 200,
+    });
+    const product2 = await models.Product.create({
+      name: 'prodcut 2',
+      wholeSalePrice: 150,
+      retailPrice: 250,
+    });
+    await models.Inventory.create({
+      InventoryLevel: 1,
+      productId: product.getDataValue('id'),
+      quantityInStock: 5,
+    });
+    await models.Inventory.create({
+      InventoryLevel: 1,
+      productId: product2.getDataValue('id'),
+      quantityInStock: 10,
+    });
+    const customer = await models.Customer.create({ name: 'james' });
+    const order = await models.Order.create({
+      customerId: customer.getDataValue('id'),
+    });
+    await models.OrderProduct.create({
+      orderId: order.getDataValue('id'),
+      productId: product.getDataValue('id'),
+      quantity: 2,
+    });
+    await models.OrderProduct.create({
+      orderId: order.getDataValue('id'),
+      productId: product2.getDataValue('id'),
+      quantity: 3,
     });
     return true;
+    // eslint-disable-next-line no-unreachable
   } catch (error) {
     // TODO log erro to a file
-    console.error('inseting to database failed');
+    console.error('inserting Failed\n', error);
     return false;
   }
 }
@@ -34,7 +66,7 @@ export async function syncDb() {
     return true;
   } catch (error) {
     // TODO log erro to a file
-    console.error('database did not sync');
+    console.error('database did not sync\n', error);
     return false;
   }
 }

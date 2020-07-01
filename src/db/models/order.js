@@ -6,16 +6,13 @@ class Order extends Model {}
 Order.init(
   {
     id: {
-      type: DataTypes.UUIDV4,
+      type: DataTypes.STRING,
       defaultValue() {
         return uuidV4();
       },
       primaryKey: true,
     },
     customerId: {
-      type: DataTypes.STRING,
-    },
-    product: {
       type: DataTypes.STRING,
     },
     createdAt: {

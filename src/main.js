@@ -18,7 +18,7 @@ app.whenReady().then(async () => {
           nodeIntegrationInWorker: true,
         },
       });
-      window.webContents.on('dom-ready', () => window.show());
+      window.webContents.on('dom-ready', () => console.log('domReady'));
     } else {
       const errorBox = (await import('./helpers/error')).default;
       const title = 'Something weng Wrong';

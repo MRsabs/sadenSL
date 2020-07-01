@@ -4,7 +4,7 @@ const { app } = require('electron');
 const isDev = require('electron-is-dev');
 
 const sequelize = new Sequelize({
-  logging: true,
+  logging: false,
   dialect: 'sqlite',
   storage: isDev
     ? path.join(process.cwd(), 'sadensl.sqlite')

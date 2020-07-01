@@ -33,5 +33,5 @@ module.exports = {
   resolve: {
     extensions: ['.wasm', '.js', '.ts', '.json', '.node'],
   },
-  watch: true,
+  watch: false,
 };

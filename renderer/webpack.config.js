@@ -31,5 +31,8 @@ module.exports = {
   ],
   resolve: {
     extensions: ['.wasm', '.js', '.jsx', '.json'],
+    alias: {
+      '@utils': path.join(__dirname, './src/utils'),
+    },
   },
 };

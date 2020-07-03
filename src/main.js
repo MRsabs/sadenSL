@@ -19,6 +19,8 @@ app.whenReady().then(async () => {
         },
       });
       window.webContents.on('dom-ready', () => window.show());
+      await import('./ipc/helpers');
+      await import('./store/storeDb');
     } else {
       const errorBox = (await import('./helpers/error')).default;
       const title = 'Something weng Wrong';

@@ -1,11 +1,15 @@
 {
     "compilerOptions": {
+        "module": "commonjs",
+        "target": "es6",
         "baseUrl": ".",
-        "module": "es6",
         "paths": {
             "@utils/*": [
                 "./src/utils/*"
-            ]
+            ],
         }
-    }
+    },
+    "exclude": [
+        "node_modules"
+    ]
 }

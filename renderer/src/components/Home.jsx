@@ -27,12 +27,12 @@ export default class Home extends Component {
         <Grid container spacing={4}>
           {this.state.sales.map((val, i) => (
             <Grid key={i} item xs={3}>
-              <SimpleCard title="fakeTitle" amount={val} />
+              <SimpleCard title="المبيعات اليوم" amount={val} />
             </Grid>
           ))}
           {[1, 2, 3, 4, 5, 6].map((val, i) => (
             <Grid key={i} item xs={4}>
-              <LineChart chartTitle="somethingggg" />
+              <LineChart chartTitle="المبيعات هذا الاسبوع" />
             </Grid>
           ))}
         </Grid>

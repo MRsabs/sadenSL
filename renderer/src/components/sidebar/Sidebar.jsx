@@ -12,6 +12,8 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
+import { Link } from 'react-router-dom';
+import ListItemLink from './ListItemLink';
 
 const drawerWidth = 240;
 
@@ -80,7 +82,20 @@ const useStyles = makeStyles((theme) => ({
 export default function Sidebar({ open, setOpen }) {
   const classes = useStyles();
   const theme = useTheme();
-  // const [open, setOpen] = React.useState(false);
+  const [sidebarItems] = React.useState([
+    'الكاشير',
+    'المخازن',
+    'التقارير',
+    'المنتجات',
+    'المساعدة',
+  ]);
+  const [routes] = React.useState([
+    '/seller',
+    '/storage',
+    '/reports',
+    '/products',
+    '/help',
+  ]);
 
   const handleDrawerClose = () => {
     setOpen(false);
@@ -111,13 +126,13 @@ export default function Sidebar({ open, setOpen }) {
       </div>
       <Divider />
       <List>
-        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
+        {sidebarItems.map((text, index) => (
+          <ListItemLink
+            key={index}
+            to={routes[index]}
+            primary={text}
+            icon={index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+          />
         ))}
       </List>
       <Divider />

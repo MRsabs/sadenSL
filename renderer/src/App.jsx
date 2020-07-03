@@ -1,9 +1,11 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import Container from '@material-ui/core/Container';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import Appbar from './components/Appbar';
-import Sidebar from './components/Sidebar';
+import Sidebar from './components/sidebar/Sidebar';
+import Storage from './components/storage/Storage';
 
 import Home from './components/Home';
 // import Bar from './components/Bar';
@@ -76,24 +78,39 @@ export default function App() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   return (
-    <div className={classes.root}>
-      <CssBaseline />
-      <Appbar title="Some Title For This Page" open={open} setOpen={setOpen} />
-      {/* <Bar open={open} setOpen={setOpen} /> */}
-      <Sidebar open={open} setOpen={setOpen} />
-      <main className={classes.content}>
-        <div className={classes.toolbar} />
-        <Router>
+    <Router>
+      <div className={classes.root}>
+        <CssBaseline />
+        <Appbar
+          title="Some Title For This Page"
+          open={open}
+          setOpen={setOpen}
+        />
+        <Sidebar open={open} setOpen={setOpen} />
+        <main className={classes.content}>
+          <div className={classes.toolbar} />
           <Switch>
-            <Route path="/">
+            <Route exact path="/reports">
               <Home />
             </Route>
-            <Route path="/other">
-              <h1>other</h1>
+            <Route path="/storage">
+              <Storage />
+            </Route>
+            <Route exact path="/products">
+              <h1>products</h1>
+            </Route>
+            <Route exact path="/help">
+              <h1>help</h1>
+            </Route>
+            <Route exact path="/">
+              <h1>root</h1>
+            </Route>
+            <Route>
+              <h1>Page not Found</h1>
             </Route>
           </Switch>
-        </Router>
-      </main>
-    </div>
+        </main>
+      </div>
+    </Router>
   );
 }

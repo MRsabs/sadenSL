@@ -18,7 +18,7 @@ ipcMain.answerRenderer(
   },
 );
 
-ipcMain.answerRenderer('readProdcut', async (x) => {
+ipcMain.answerRenderer('readProdcut', async (x: any) => {
   try {
     const product = await models.Product.findOne({
       where: {

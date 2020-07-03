@@ -33,9 +33,5 @@ app.whenReady().then(async () => {
     app.exit(1);
   }
 });
-// app.on('activate', () => {
-//   if (BrowserWindow.getAllWindows().length === 0) createWindow();
-// });
-// app.on('window-all-closed', () => {
-//   if (process.platform !== 'darwin') app.quit();
-// });
+
+// TODO something  should be here have to do with electron on mac

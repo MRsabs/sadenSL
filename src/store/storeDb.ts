@@ -1,6 +1,6 @@
 import levelup from 'levelup';
 import leveldown from 'leveldown';
-import Path from 'path';
+import * as Path from 'path';
 
 // eslint-disable-next-line no-unused-vars
 const db = levelup(leveldown(Path.join(process.cwd(), 'levelDB')));

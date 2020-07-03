@@ -8,19 +8,19 @@ module.exports = {
   },
   externals: [nodeExternals()],
   target: 'electron-main',
-  entry: Path.join(__dirname, './src/main.js'),
+  entry: Path.join(__dirname, './src/main.ts'),
   module: {
     rules: [
       {
         enforce: 'pre',
-        test: /\.js$/,
+        test: /\.(js|ts)$/,
         exclude: /node_modules/,
         loader: 'eslint-loader',
         options: {
           fix: true,
         },
       },
-      { test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader' },
+      { test: /\.(js|ts)$/, exclude: /node_modules/, loader: 'ts-loader' },
       {
         test: /\.node$/,
         loader: 'node-loader',

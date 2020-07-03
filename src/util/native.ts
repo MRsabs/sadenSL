@@ -1,8 +1,10 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 import addon from './native/index.node';
 /**
  * @returns {string}
  */
-export function hello() {
+export function hello(): string {
   return addon.hello();
 }
 
@@ -10,20 +12,20 @@ export function hello() {
  * @param {string} x
  * @returns {string}
  */
-export function nwc(x) {
+export function nwc(x: string): string {
   return addon.nwc(x.toString());
 }
 
 /**
  * @returns {number}
  */
-export function unixNow() {
+export function unixNow(): number {
   return addon.unixNow();
 }
 
 /**
  * @returns {string}
  */
-export function uuidV4() {
+export function uuidV4(): string {
   return addon.uuidV4();
 }

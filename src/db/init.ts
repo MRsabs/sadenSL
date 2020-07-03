@@ -1,7 +1,8 @@
+import path = require('path');
+import { app } from 'electron';
+import isDev = require('electron-is-dev');
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const Sequelize = require('sequelize');
-const path = require('path');
-const { app } = require('electron');
-const isDev = require('electron-is-dev');
 
 const sequelize = new Sequelize({
   logging: false,
@@ -11,7 +12,7 @@ const sequelize = new Sequelize({
     : path.join(app.getPath('userData'), 'sadensl.sqlite'),
 });
 
-export async function testDb() {
+export async function testDb(): Promise<boolean> {
   try {
     return true;
     // eslint-disable-next-line no-unreachable
@@ -59,7 +60,7 @@ export async function testDb() {
   }
 }
 
-export async function syncDb() {
+export async function syncDb(): Promise<boolean> {
   try {
     await import('./models/index');
     await sequelize.sync({ alter: { drop: false } });
@@ -71,7 +72,7 @@ export async function syncDb() {
   }
 }
 
-export async function authenticateDb() {
+export async function authenticateDb(): Promise<boolean> {
   try {
     await sequelize.authenticate();
     return true;

@@ -2,7 +2,9 @@ import { BrowserWindow } from 'electron';
 import * as path from 'path';
 import * as isDev from 'electron-is-dev';
 
-export default function createWindow(winOpt) {
+export default function createWindow(
+  winOpt: Electron.BrowserWindowConstructorOptions,
+): Electron.BrowserWindow {
   const mainWindow = new BrowserWindow(winOpt);
   if (isDev) {
     mainWindow.loadURL('http://localhost:8080');

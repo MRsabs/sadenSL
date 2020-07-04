@@ -6,6 +6,7 @@ module.exports = {
   node: {
     __dirname: false,
   },
+  devtool: 'eval',
   externals: [nodeExternals()],
   target: 'electron-main',
   entry: Path.join(__dirname, './src/main.ts'),

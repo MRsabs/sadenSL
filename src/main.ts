@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { app } from 'electron';
 import * as db from './db/init';
 import createWindow from './helpers/createWindow';

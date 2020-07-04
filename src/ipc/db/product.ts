@@ -1,6 +1,6 @@
 import { ipcMain } from 'electron-better-ipc';
 // import { nwc, unixNow } from '../util/native';
-import * as models from '../db/models/index';
+import * as models from '../../db/models/index';
 
 ipcMain.answerRenderer(
   'createProduct',
@@ -15,7 +15,7 @@ ipcMain.answerRenderer(
     } catch (error) {
       return false;
     }
-  },
+  }
 );
 
 ipcMain.answerRenderer('readProdcut', async (x: any) => {

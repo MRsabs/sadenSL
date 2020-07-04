@@ -6,7 +6,6 @@ module.exports = {
   node: {
     __dirname: false,
   },
-  devtool: 'eval',
   externals: [nodeExternals()],
   target: 'electron-main',
   entry: Path.join(__dirname, './src/main.ts'),
@@ -14,14 +13,14 @@ module.exports = {
     rules: [
       {
         enforce: 'pre',
-        test: /\.(js|ts)$/,
+        test: /\.ts$/,
         exclude: /node_modules/,
         loader: 'eslint-loader',
         options: {
           fix: true,
         },
       },
-      { test: /\.(js|ts)$/, exclude: /node_modules/, loader: 'ts-loader' },
+      { test: /\.ts$/, exclude: /node_modules/, loader: 'ts-loader' },
       {
         test: /\.node$/,
         loader: 'node-loader',

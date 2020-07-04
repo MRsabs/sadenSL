@@ -3,7 +3,7 @@ sadensl.sqlite
 renderer/node_modules
 renderer/dist
 addon/node_modules
-addon/index.node
+addon/native/index.node
 addon/native/target
 addon/native/artifacts.json
 addon/**/.DS_Store

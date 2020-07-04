@@ -1,6 +1,7 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
-import addon from './native/index.node';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const addon = require('./native/index.node');
 /**
  * @returns {string}
  */

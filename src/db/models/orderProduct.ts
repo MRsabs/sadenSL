@@ -12,12 +12,6 @@ OrderProduct.init(
       },
       primaryKey: true,
     },
-    orderId: {
-      type: DataTypes.STRING,
-    },
-    productId: {
-      type: DataTypes.STRING,
-    },
     quantity: {
       type: DataTypes.NUMBER,
     },
@@ -34,7 +28,7 @@ OrderProduct.init(
       },
     },
   },
-  { sequelize, modelName: 'orderProduct' },
+  { sequelize, modelName: 'orderProduct' }
 );
 
 export default OrderProduct;

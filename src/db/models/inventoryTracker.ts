@@ -2,8 +2,8 @@ import { Model, DataTypes } from 'sequelize';
 import sequelize from '../init';
 import { unixNow, uuidV4 } from '../../util/native';
 
-class Order extends Model {}
-Order.init(
+class InventoryTracker extends Model {}
+InventoryTracker.init(
   {
     id: {
       type: DataTypes.STRING,
@@ -11,6 +11,9 @@ Order.init(
         return uuidV4();
       },
       primaryKey: true,
+    },
+    inventoryName: {
+      type: DataTypes.STRING,
     },
     createdAt: {
       type: 'TIMESTAMP',
@@ -25,7 +28,7 @@ Order.init(
       },
     },
   },
-  { sequelize, modelName: 'order' }
+  { sequelize, modelName: 'inventoryTracker' }
 );
 
-export default Order;
+export default InventoryTracker;

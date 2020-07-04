@@ -12,8 +12,8 @@ Inventory.init(
       },
       primaryKey: true,
     },
-    InventoryLevel: {
-      type: DataTypes.NUMBER,
+    trackerId: {
+      type: DataTypes.STRING,
     },
     productId: {
       type: DataTypes.NUMBER,
@@ -36,7 +36,7 @@ Inventory.init(
       },
     },
   },
-  { sequelize, modelName: 'inventory' },
+  { sequelize, modelName: 'inventory' }
 );
 
 export default Inventory;

@@ -12,13 +12,6 @@ Inventory.init(
       },
       primaryKey: true,
     },
-    trackerId: {
-      type: DataTypes.STRING,
-    },
-    productId: {
-      type: DataTypes.NUMBER,
-      defaultValue: 0,
-    },
     quantityInStock: {
       type: DataTypes.NUMBER,
       defaultValue: 0,

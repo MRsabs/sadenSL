@@ -14,43 +14,45 @@ const sequelize = new Sequelize({
 
 export async function testDb(): Promise<boolean> {
   try {
-    return true;
-    // eslint-disable-next-line no-unreachable
     const models = await import('./models/index');
+    const inventory = await models.InventoryTracker.create({
+      inventoryName: 'baghdad storage',
+    });
     const product = await models.Product.create({
       name: 'prodcut 1',
       wholeSalePrice: 100,
       retailPrice: 200,
     });
-    const product2 = await models.Product.create({
-      name: 'prodcut 2',
-      wholeSalePrice: 150,
-      retailPrice: 250,
-    });
     await models.Inventory.create({
-      InventoryLevel: 1,
+      trackerId: inventory.getDataValue('id'),
       productId: product.getDataValue('id'),
       quantityInStock: 5,
     });
-    await models.Inventory.create({
-      InventoryLevel: 1,
-      productId: product2.getDataValue('id'),
-      quantityInStock: 10,
-    });
-    const customer = await models.Customer.create({ name: 'james' });
+    const customer = await models.Customer.create({ name: 'guest' });
     const order = await models.Order.create({
       customerId: customer.getDataValue('id'),
     });
-    await models.OrderProduct.create({
+    const orderProduct = await models.OrderProduct.create({
       orderId: order.getDataValue('id'),
       productId: product.getDataValue('id'),
       quantity: 2,
     });
-    await models.OrderProduct.create({
-      orderId: order.getDataValue('id'),
-      productId: product2.getDataValue('id'),
-      quantity: 3,
+    const updateQuantity = await models.Inventory.findOne({
+      where: {
+        productId: product.getDataValue('id'),
+      },
     });
+    const quantityInStock = updateQuantity.getDataValue('quantityInStock');
+    const quantityInOrder = orderProduct.getDataValue('quantity');
+    const newQuantity = quantityInStock - quantityInOrder;
+    await models.Inventory.update(
+      { quantityInStock: newQuantity },
+      {
+        where: {
+          productId: orderProduct.getDataValue('productId'),
+        },
+      }
+    );
     return true;
     // eslint-disable-next-line no-unreachable
   } catch (error) {

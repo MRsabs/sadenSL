@@ -1,6 +1,6 @@
 node_modules
 sadensl.sqlite
-src/util/native/index.node
+src/util/index.node
 renderer/node_modules
 renderer/dist
 addon/node_modules

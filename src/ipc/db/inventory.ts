@@ -25,10 +25,12 @@ ipc.handle('inventory/read/all', async () => {
 
 ipc.handle('inventory/read/one', async (e, trackerId) => {
   try {
-    const data = await models.Inventory.findAndCountAll({
+    const data = await models.Inventory.findAll({
       where: {
         trackerId,
       },
+      include: models.Product,
+      raw: true,
     });
     return data;
   } catch (error) {

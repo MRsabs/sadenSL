@@ -1,4 +1,4 @@
-import { ipcMain } from 'electron-better-ipc';
+import { ipcMain } from 'electron';
 // import { nwc, unixNow } from '../util/native';
 import * as models from '../../db/models/index';
 
@@ -10,15 +10,12 @@ interface productCreate {
   trackerId: string;
 }
 
-ipcMain.answerRenderer(
+ipcMain.handle(
   'prodcut/create',
-  async ({
-    name,
-    wholeSalePrice,
-    retailPrice,
-    quantity,
-    trackerId,
-  }: productCreate) => {
+  async (
+    e,
+    { name, wholeSalePrice, retailPrice, quantity, trackerId }: productCreate
+  ) => {
     try {
       const product = await models.Product.create({
         name,
@@ -37,15 +34,15 @@ ipcMain.answerRenderer(
   }
 );
 
-ipcMain.answerRenderer('product/read', async (id: string) => {
+ipcMain.handle('product/read', async (e, id: string) => {
   try {
     const product = await models.Product.findOne({
       where: {
         id,
       },
-      include: { all: true },
+      // include: { all: true },
     });
-    return product;
+    return product.toJSON();
   } catch (error) {
     return false;
   }

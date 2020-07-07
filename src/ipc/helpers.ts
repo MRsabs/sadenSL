@@ -1,13 +1,18 @@
 import { ipcMain } from 'electron-better-ipc';
 import { nwc, unixNow } from '../util/native';
 
-ipcMain.answerRenderer(
+ipcMain.handle(
   'nwc',
-  async (x: string): Promise<string> => {
+  async (e, x: string): Promise<string> => {
     return nwc(x);
-  },
+  }
 );
 
-ipcMain.answerRenderer('unixNow', async () => {
+ipcMain.handle('unixNow', async () => {
   return unixNow();
+});
+
+ipcMain.handle('hello', async () => {
+  console.log('hello IPC IS CALLED');
+  return 'hello from main';
 });

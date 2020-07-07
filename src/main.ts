@@ -20,7 +20,9 @@ app.whenReady().then(async () => {
         },
       });
       window.webContents.on('dom-ready', () => window.show());
-      await import('./ipc/helpers');
+      // await import('./ipc/helpers');
+      // await (await import('./ipc/db/index')).default();
+      (await import('./ipc/initIpc')).default();
       await import('./store/storeDb');
     } else {
       const errorBox = (await import('./helpers/error')).default;

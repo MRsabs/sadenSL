@@ -1,8 +1,8 @@
-import { ipcMain } from 'electron-better-ipc';
+import { ipcMain as ipc } from 'electron';
 // import { nwc, unixNow } from '../util/native';
 import * as models from '../../db/models/index';
 
-ipcMain.answerRenderer('inventory/create', async (inventoryName?: string) => {
+ipc.handle('inventory/create', async (e, inventoryName?: string) => {
   try {
     await models.InventoryTracker.create({
       inventoryName,
@@ -14,24 +14,25 @@ ipcMain.answerRenderer('inventory/create', async (inventoryName?: string) => {
   }
 });
 
-ipcMain.answerRenderer('inventory/read/all', async () => {
+ipc.handle('inventory/read/all', async () => {
   try {
-    return await models.InventoryTracker.findAndCountAll();
+    const data = await models.InventoryTracker.findAndCountAll();
+    return data;
   } catch (error) {
-    // TODO log error & display friendly message
     return false;
   }
 });
 
-ipcMain.answerRenderer('inventory/read/one', async (trackerId: string) => {
+ipc.handle('inventory/read/one', async (e, trackerId) => {
   try {
-    return await models.Inventory.findAndCountAll({
+    const data = await models.Inventory.findAndCountAll({
       where: {
         trackerId,
       },
     });
+    return data;
   } catch (error) {
-    // TODO log error & display friendly message
+    console.error('did not get inventory ittems\n', error);
     return false;
   }
 });

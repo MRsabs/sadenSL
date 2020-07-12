@@ -1,5 +1,9 @@
 const Path = require('path');
+const fs = require('fs-extra');
 const nodeExternals = require('webpack-node-externals');
+if (fs.existsSync(Path.resolve(__dirname, './tmp'))) {
+  fs.removeSync(Path.resolve(__dirname, './tmp'));
+}
 
 module.exports = {
   mode: 'development',

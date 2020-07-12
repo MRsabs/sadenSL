@@ -1,14 +1,13 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Container from '@material-ui/core/Container';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import Appbar from './components/Appbar';
 import Sidebar from './components/sidebar/Sidebar';
 import Storage from './components/storage/Storage';
-
 import Home from './components/Home';
-// import Bar from './components/Bar';
+import StorageContextProvider from '@contexts/StorageContext';
+import Casher from './components/casher/Casher';
 
 const drawerWidth = 240;
 
@@ -81,20 +80,21 @@ export default function App() {
     <Router>
       <div className={classes.root}>
         <CssBaseline />
-        <Appbar
-          title="Some Title For This Page"
-          open={open}
-          setOpen={setOpen}
-        />
+        <Appbar title="سدنـسيل" open={open} setOpen={setOpen} />
         <Sidebar open={open} setOpen={setOpen} />
         <main className={classes.content}>
           <div className={classes.toolbar} />
           <Switch>
+            <Route exact path="/casher">
+              <Casher />
+            </Route>
             <Route exact path="/reports">
               <Home />
             </Route>
             <Route path="/storage">
-              <Storage />
+              <StorageContextProvider>
+                <Storage />
+              </StorageContextProvider>
             </Route>
             <Route exact path="/products">
               <h1>products</h1>

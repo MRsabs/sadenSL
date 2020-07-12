@@ -11,6 +11,10 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
+import ShoppingCartRounded from '@material-ui/icons/ShoppingCartRounded';
+import TrendingUpRounded from '@material-ui/icons/TrendingUpRounded';
+import StorageRounded from '@material-ui/icons/StorageRounded';
+import HelpOutlineRounded from '@material-ui/icons/HelpOutlineRounded';
 import MailIcon from '@material-ui/icons/Mail';
 import { Link } from 'react-router-dom';
 import ListItemLink from './ListItemLink';
@@ -90,11 +94,39 @@ export default function Sidebar({ open, setOpen }) {
     'المساعدة',
   ]);
   const [routes] = React.useState([
-    '/seller',
+    '/casher',
     '/storage',
     '/reports',
     '/products',
     '/help',
+  ]);
+
+  const [sidebarListItems] = React.useState([
+    {
+      route: '/casher',
+      name: 'الكاشير',
+      icon: <ShoppingCartRounded />,
+    },
+    {
+      route: '/storage',
+      name: 'المخازن',
+      icon: <StorageRounded />,
+    },
+    {
+      route: '/reports',
+      name: 'التقارير',
+      icon: <TrendingUpRounded />,
+    },
+    {
+      route: '/products',
+      name: 'المنتجات',
+      icon: null,
+    },
+    {
+      route: '/help',
+      name: 'المساعدة',
+      icon: <HelpOutlineRounded />,
+    },
   ]);
 
   const handleDrawerClose = () => {
@@ -126,14 +158,16 @@ export default function Sidebar({ open, setOpen }) {
       </div>
       <Divider />
       <List>
-        {sidebarItems.map((text, index) => (
-          <ListItemLink
-            key={index}
-            to={routes[index]}
-            primary={text}
-            icon={index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-          />
-        ))}
+        {sidebarListItems.map(({ name, route, icon }) => {
+          return (
+            <ListItemLink
+              key={name}
+              to={route}
+              primary={name}
+              icon={icon === null ? <InboxIcon /> : icon}
+            />
+          );
+        })}
       </List>
       <Divider />
       <List>

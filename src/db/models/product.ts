@@ -12,6 +12,12 @@ Product.init(
       },
       primaryKey: true,
     },
+    barcode: {
+      type: DataTypes.STRING,
+      defaultValue() {
+        return 'unknown';
+      },
+    },
     name: {
       type: DataTypes.STRING,
     },
@@ -36,7 +42,7 @@ Product.init(
       },
     },
   },
-  { sequelize, modelName: 'product' },
+  { sequelize, modelName: 'product' }
 );
 
 export default Product;

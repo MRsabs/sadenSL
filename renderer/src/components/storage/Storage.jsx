@@ -1,45 +1,68 @@
-import React from 'react';
+import React, { useEffect, useContext } from 'react';
+import { ipcRenderer } from 'electron';
 import { Container, Grid } from '@material-ui/core';
-import SimpleCard from '../Deposits';
-import SimpleTable from './Table';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  useRouteMatch,
-  useParams,
-} from 'react-router-dom';
+import { makeStyles } from '@material-ui/core/styles';
+import { Switch, Route, useRouteMatch } from 'react-router-dom';
+import { StorageContext } from '@contexts/StorageContext';
+import NoStorage from './NoStorage';
+import OneStorage from './OneStorage';
+import OneStorageContextProvider from '@contexts/OneStorageContext';
+import TopPanel from './TopPanel';
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+}));
+
 export default function Storage() {
   let match = useRouteMatch();
-  console.log(match);
-  return (
-    <Container maxWidth="lg">
-      <div>
-        <h2>Topics</h2>
-
-        <ul>
-          <li>
-            <Link to={`${match.url}/components`}>Components</Link>
-          </li>
-          <li>
-            <Link to={`${match.url}/props-v-state`}>Props v. State</Link>
-          </li>
-        </ul>
-        <Switch>
-          <Route path={`${match.path}/:topicId`}>
-            <Topic />
-          </Route>
-          <Route path={match.path}>
-            <h3>Please select a topic.</h3>
-          </Route>
-        </Switch>
-      </div>
-    </Container>
-  );
+  const { storage, dispatch } = useContext(StorageContext);
+  useEffect(() => {
+    ipcRenderer.invoke('inventory/read/all').then((data) => {
+      dispatch({
+        type: 'sync',
+        payload: data,
+      });
+    });
+  }, []);
+  if (storage.count === 0) {
+    return <NoStore />;
+  } else {
+    return (
+      <OneStorageContextProvider>
+        <Container maxWidth="lg">
+          <div>
+            <TopPanel
+              title="اختار احد المخازن"
+              storages={storage.rows}
+              match={match}
+            />
+            <Switch>
+              <Route path={`${match.path}/:storageId`}>
+                <OneStorage />
+              </Route>
+              <Route path={match.path}>
+                <h3>الرجاء اختيار احد المخازن</h3>
+              </Route>
+            </Switch>
+          </div>
+        </Container>
+      </OneStorageContextProvider>
+    );
+  }
 }
 
-function Topic() {
-  let { topicId } = useParams();
-  return <h3>Requested topic ID: {topicId}</h3>;
+function NoStore() {
+  const classes = useStyles();
+  return (
+    <Container className={classes.root} maxWidth="lg">
+      <Grid container direction="row" justify="center" alignItems="center">
+        <Grid item>
+          <NoStorage />
+        </Grid>
+      </Grid>
+    </Container>
+  );
 }

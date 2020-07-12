@@ -3,7 +3,19 @@ const path = require('path');
 
 module.exports = {
   entry: path.resolve(__dirname, './src/index.jsx'),
+  mode: 'development',
   target: 'electron-renderer',
+  devtool: 'eval',
+  output: {
+    // path: path.resolve(__dirname, 'dist'),
+    filename: 'index_bundle.js',
+    publicPath: '/',
+  },
+  devServer: {
+    historyApiFallback: true,
+    contentBase: './dist',
+    hot: true,
+  },
   module: {
     rules: [
       {
@@ -33,6 +45,7 @@ module.exports = {
     extensions: ['.wasm', '.js', '.jsx', '.json'],
     alias: {
       '@utils': path.join(__dirname, './src/utils'),
+      '@contexts': path.join(__dirname, './src/contexts'),
     },
   },
 };

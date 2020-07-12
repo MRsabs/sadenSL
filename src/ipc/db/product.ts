@@ -40,10 +40,41 @@ ipcMain.handle('product/read', async (e, id: string) => {
       where: {
         id,
       },
-      // include: { all: true },
     });
     return product.toJSON();
   } catch (error) {
     return false;
   }
 });
+
+ipcMain.handle('product/read/barcode', async (e, barcode: string) => {
+  try {
+    const product = await models.Product.findOne({
+      where: {
+        barcode,
+      },
+    });
+    if (product != null) {
+      return product.toJSON();
+    } else {
+      return null;
+    }
+  } catch (error) {
+    return false;
+  }
+});
+
+// ipcMain.handle('product/update', async (e, id: string) => {
+//   try {
+//     await models.Inventory.update(
+//       { quantityInStock: newQuantity },
+//       {
+//         where: {
+//           productId: orderProduct.getDataValue('productId'),
+//         },
+//       }
+//     );
+//   } catch (error) {
+//     return false;
+//   }
+// });

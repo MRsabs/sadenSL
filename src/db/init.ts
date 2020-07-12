@@ -22,12 +22,43 @@ export async function testDb(): Promise<boolean> {
       name: 'prodcut 1',
       wholeSalePrice: 100,
       retailPrice: 200,
+      barcode: 11111111,
     });
     await models.Inventory.create({
       trackerId: inventory.getDataValue('id'),
       productId: product.getDataValue('id'),
       quantityInStock: 5,
     });
+    const product2 = await models.Product.create({
+      name: 'prodcut 2',
+      wholeSalePrice: 2100,
+      retailPrice: 2200,
+      barcode: 22222222,
+    });
+    await models.Inventory.create({
+      trackerId: inventory.getDataValue('id'),
+      productId: product2.getDataValue('id'),
+      quantityInStock: 15,
+    });
+
+    await (async function () {
+      const inventory = await models.InventoryTracker.create({
+        inventoryName: 'test storage',
+      });
+      [1, 2, 3, 4, 5].map(async (val, i) => {
+        const product = await models.Product.create({
+          name: i % 2 === 0 ? 'prodcut even' + i : 'prodcut odd' + 1,
+          wholeSalePrice: 100,
+          retailPrice: 200,
+          barcode: 46152 * i,
+        });
+        await models.Inventory.create({
+          trackerId: inventory.getDataValue('id'),
+          productId: product.getDataValue('id'),
+          quantityInStock: Math.floor(Math.random() * 50) + 1,
+        });
+      });
+    })();
     const customer = await models.Customer.create({ name: 'guest' });
     const order = await models.Order.create({
       customerId: customer.getDataValue('id'),

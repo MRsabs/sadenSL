@@ -1,0 +1,11 @@
+{
+  "appId": "oneoften",
+  "asar": true,
+  "linux": {
+    "target": ["AppImage"]
+  },
+  "directories": {
+    "buildResources": "assets",
+    "output": "package"
+  }
+}

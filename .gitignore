@@ -9,5 +9,6 @@ addon/native/target
 addon/native/artifacts.json
 addon/**/.DS_Store
 dist
+package
 .cache
 levelDB

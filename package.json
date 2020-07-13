@@ -2,6 +2,14 @@
   "name": "sadensl",
   "version": "0.1.0",
   "main": "dist/main.js",
+  "author": {
+    "email": "info@qatara.com",
+    "name": "Qatara",
+    "url": "http://www.qatara.com"
+  },
+  "license": "LicenseRef-LICENSE",
+  "private": "true",
+  "repository": "https://github.com/MRsabS/sadanSL",
   "scripts": {
     "start": "electron dist/main.js",
     "bundle:dev": "webpack --env=dev",
@@ -11,9 +19,6 @@
     "native:dep": "electron-builder install-app-deps",
     "pack:linux": "electron-builder build --linux"
   },
-  "repository": "https://github.com/MRsabS/sadanSL",
-  "author": "Qatara",
-  "license": "LicenseRef-LICENSE",
   "devDependencies": {
     "@types/leveldown": "^4.0.2",
     "@types/levelup": "^4.3.0",

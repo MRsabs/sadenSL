@@ -3,5 +3,3 @@ renderer
 build
 addon
 webpack.config.*
-dist
-package

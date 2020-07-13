@@ -1,7 +1,7 @@
 {
   "scripts": {
-    "start": "webpack-dev-server --mode development",
-    "build": "webpack --mode production",
+    "start": "webpack-dev-server --env=dev",
+    "build": "webpack --env=prod",
     "lint": "eslint ./src --fix"
   },
   "dependencies": {
@@ -37,6 +37,7 @@
     "eslint-plugin-jsx-a11y": "^6.3.0",
     "eslint-plugin-react": "^7.20.0",
     "eslint-plugin-react-hooks": "^4",
+    "fs-extra": "^9.0.1",
     "html-loader": "^1.1.0",
     "html-webpack-plugin": "^4.3.0",
     "react-hot-loader": "^4.12.21",

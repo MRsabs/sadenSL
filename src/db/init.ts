@@ -47,7 +47,7 @@ export async function testDb(): Promise<boolean> {
       });
       [1, 2, 3, 4, 5].map(async (val, i) => {
         const product = await models.Product.create({
-          name: i % 2 === 0 ? 'prodcut even' + i : 'prodcut odd' + 1,
+          name: i % 2 === 0 ? 'prodcut even' + i : 'prodcut odd' + i,
           wholeSalePrice: 100,
           retailPrice: 200,
           barcode: 46152 * i,

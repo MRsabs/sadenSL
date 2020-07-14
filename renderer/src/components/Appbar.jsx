@@ -78,7 +78,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
   },
   endOfFlex: {
-    justifyContent: 'end',
+    justifyContent: 'flex-end',
   },
 }));
 

@@ -11,7 +11,7 @@ module.exports = {
   target: 'electron-renderer',
   devtool: 'eval',
   output: {
-    path: path.resolve(__dirname, '../dist/renderer'),
+    path: path.resolve(__dirname, '../dist/erenderer'),
     filename: 'index_bundle.js',
     publicPath: './',
   },

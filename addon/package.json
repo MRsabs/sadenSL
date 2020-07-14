@@ -4,8 +4,8 @@
     "neon-cli": "^0.4.0"
   },
   "scripts": {
-    "predevelopment": "pnpm i",
-    "preproduction": "pnpm i",
+    "predevelopment": "npm i",
+    "preproduction": "npm i",
     "development": "electron-build-env neon build",
     "production": "electron-build-env neon build --release"
   }

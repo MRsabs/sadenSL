@@ -135,15 +135,12 @@ function Casher() {
             <Grid item xs={12}>
               <TextField
                 value={input}
-                onChange={(e) => {
-                  if (
-                    e.target.value.charAt(e.target.value.length - 1) === 'z'
-                  ) {
+                onKeyPress={(e) => {
+                  if (e.key === 'Enter' && auto === 'اوتوماتيكي') {
                     onSubmit();
-                  } else {
-                    setInput(e.target.value);
                   }
                 }}
+                onChange={(e) => setInput(e.target.value)}
                 type="text"
                 style={{ width: '100%' }}
                 placeholder="ادخل الباركود"

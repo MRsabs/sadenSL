@@ -1,4 +1,5 @@
 import React, { createContext, useReducer } from 'react';
+import PropTypes from 'prop-types'
 
 export const OneStorageContext = createContext();
 
@@ -19,5 +20,10 @@ const OneStorageContextProvider = (props) => {
     </OneStorageContext.Provider>
   );
 };
+
+
+OneStorageContextProvider.propTypes = {
+  children: PropTypes.element
+}
 
 export default OneStorageContextProvider;

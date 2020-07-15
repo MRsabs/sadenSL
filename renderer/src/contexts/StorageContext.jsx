@@ -1,12 +1,8 @@
-import React, { createContext, useState, useReducer } from 'react';
+import React, { createContext, useReducer } from 'react';
+import PropTypes from 'prop-types'
+
 
 export const StorageContext = createContext();
-
-// const syncWithDatabase = () => {
-//   ipcRenderer.callMain('inventory/read/all').then((data) => {
-//     setStorage(data);
-//   });
-// };
 
 const storageReducer = (state, action) => {
   switch (action.type) {
@@ -31,3 +27,7 @@ const StorageContextProvider = (props) => {
 };
 
 export default StorageContextProvider;
+
+StorageContextProvider.propTypes = {
+  children: PropTypes.element.isRequired
+};

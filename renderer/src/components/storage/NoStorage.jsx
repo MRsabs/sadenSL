@@ -20,6 +20,7 @@ export default function NoStorage() {
     setOpen(false);
   };
 
+  // eslint-disable-next-line no-unused-vars
   const createStorage = () => {
     // TODO
   };

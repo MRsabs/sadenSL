@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types'
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -132,19 +133,9 @@ export default function Appbar({ open, setOpen, title }) {
     </AppBar>
   );
 }
-{
-  /* <IconButton
-color="inherit"
-aria-label="open drawer"
-onClick={handleDrawerOpen}
-edge="start"
-className={clsx(classes.menuButton, {
-  [classes.hide]: open,
-})}
->
-<MenuIcon />
-</IconButton>
-<Typography variant="h6" noWrap>
-Mini variant drawer
-</Typography> */
+
+Appbar.propTypes = {
+  open: PropTypes.bool.isRequired,
+  setOpen: PropTypes.func.isRequired,
+  title: PropTypes.string.isRequired
 }

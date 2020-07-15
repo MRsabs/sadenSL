@@ -38,6 +38,6 @@ export default function LineChart({ chartTitle }) {
   );
 }
 
-LineChart.prototype = {
+LineChart.propTypes = {
   chartTitle: PropTypes.string.isRequired,
 };

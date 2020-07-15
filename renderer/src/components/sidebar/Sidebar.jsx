@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types'
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -16,7 +17,6 @@ import TrendingUpRounded from '@material-ui/icons/TrendingUpRounded';
 import StorageRounded from '@material-ui/icons/StorageRounded';
 import HelpOutlineRounded from '@material-ui/icons/HelpOutlineRounded';
 import MailIcon from '@material-ui/icons/Mail';
-import { Link } from 'react-router-dom';
 import ListItemLink from './ListItemLink';
 
 const drawerWidth = 240;
@@ -83,24 +83,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Sidebar({ open, setOpen }) {
+function Sidebar({ open, setOpen }) {
   const classes = useStyles();
   const theme = useTheme();
-  const [sidebarItems] = React.useState([
-    'الكاشير',
-    'المخازن',
-    'التقارير',
-    'المنتجات',
-    'المساعدة',
-  ]);
-  const [routes] = React.useState([
-    '/casher',
-    '/storage',
-    '/reports',
-    '/products',
-    '/help',
-  ]);
-
   const [sidebarListItems] = React.useState([
     {
       route: '/casher',
@@ -183,3 +168,12 @@ export default function Sidebar({ open, setOpen }) {
     </Drawer>
   );
 }
+
+
+Sidebar.propTypes = {
+  open: PropTypes.bool,
+  setOpen: PropTypes.func
+}
+
+
+export default Sidebar;

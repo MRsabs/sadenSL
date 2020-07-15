@@ -8,7 +8,7 @@ import NoStorage from './NoStorage';
 import OneStorage from './OneStorage';
 import OneStorageContextProvider from '@contexts/OneStorageContext';
 import TopPanel from './TopPanel';
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   root: {
     display: 'flex',
     justifyContent: 'center',

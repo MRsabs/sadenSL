@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types'
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -23,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function TopPanel(props) {
-  const { oneStorage, dispatch } = React.useContext(OneStorageContext);
+  const { dispatch } = React.useContext(OneStorageContext);
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [store, setStore] = React.useState('اختار احد المخازن');
@@ -91,4 +92,10 @@ export default function TopPanel(props) {
       </AppBar>
     </div>
   );
+}
+
+
+TopPanel.propTypes = {
+  storages: PropTypes.arrayOf(PropTypes.object),
+  match: PropTypes.object
 }

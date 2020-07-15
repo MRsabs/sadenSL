@@ -3,19 +3,22 @@ import Grid from '@material-ui/core/Grid';
 import { Container } from '@material-ui/core';
 import SimpleCard from './Deposits';
 import LineChart from './charts/LineChart';
-import numberWithCommas from '@utils/numberWithCommas';
+import { ipcRenderer } from 'electron';
 
 export default class Home extends Component {
-  state = {
-    sales: [0, 0, 0, 0, 0, 0, 0, 0],
-    test: 'ksamk',
-  };
+  constructor() {
+    super()
+    this.state = {
+      sales: [0, 0, 0, 0, 0, 0, 0, 0],
+      test: 'ksamk',
+    };
+  }
   async componentDidMount() {
     const data = [];
     this.state.sales.forEach(async (val, i) => {
-      data.push(await numberWithCommas(i * 32900));
+      data.push(await ipcRenderer.invoke('nwc', i * 32900));
       if (i === 7) {
-        this.setState((state, props) => {
+        this.setState((state) => {
           return { ...state, sales: data };
         });
       }

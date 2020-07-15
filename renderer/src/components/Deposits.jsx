@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
+import PropTypes from 'prop-types'
 
 const useStyles = makeStyles({
   root: {
@@ -22,7 +23,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function SimpleCard(props) {
+function SimpleCard(props) {
   const classes = useStyles();
 
   return (
@@ -38,3 +39,13 @@ export default function SimpleCard(props) {
     </Card>
   );
 }
+
+
+SimpleCard.propTypes = {
+  title: PropTypes.string.isRequired,
+  amount: PropTypes.string.isRequired
+}
+
+
+
+export default SimpleCard;

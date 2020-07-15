@@ -1,17 +1,17 @@
 import React from 'react';
+import PropTypes from 'prop-types'
 import { ipcRenderer } from 'electron';
-import { Container, Grid, TextField, Button, Divider } from '@material-ui/core';
+import { Container, Grid, TextField, Button } from '@material-ui/core';
 import SpanningTable from './Other';
 import { makeStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 
-const TAX_RATE = 0.07;
+const TAX_RATE = -0.07;
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function taxAmount(TAX_RATE, invoiceSubtotal) {
-  return TAX_RATE * invoiceSubtotal;
+  return (TAX_RATE * invoiceSubtotal);
 }
 
 function subtotal(items) {
@@ -55,7 +55,7 @@ function Casher() {
   const [input, setInput] = React.useState('');
   const [inputNum, setInputNum] = React.useState('');
   const [state, setState] = React.useState([
-    // { desc: 'product', qty: 10, unit: 100, price: 1000 },
+    // { desc: 'product', qty: 10, unit: 100, price: '10,000' },
   ]);
   const onSubmit = async () => {
     const data = await ipcRenderer.invoke('product/read/barcode', input.trim());
@@ -71,6 +71,7 @@ function Casher() {
     const orderQty = inputNum ? inputNum : 1;
     const row = createRow(data.name, orderQty, data.retailPrice);
     if (state.length === 0) {
+      // row.displayPrice = await ipcRenderer.invoke('nwc', row.price)
       newState.push(row);
     } else {
       state.map(async (value, i) => {
@@ -78,22 +79,26 @@ function Casher() {
           newRow = false;
           value.qty = value.qty + row.qty;
           value.price = value.unit * value.qty;
+          // value.displayPrice = await ipcRenderer.invoke('nwc', value.price)
           newState.push(value);
         } else if (i === state.length - 1 && newRow) {
+          // value.displayPrice = await ipcRenderer.invoke('nwc', value.price)
           newState.push(value);
           newState.push(row);
         } else {
+          // value.displayPrice = await ipcRenderer.invoke('nwc', value.price)
           newState.push(value);
         }
       });
     }
-
+    
     let subT = subtotal(newState);
     let taxT = taxAmount(TAX_RATE, subT);
     let invT = taxT + subT;
 
     subT = await ipcRenderer.invoke('nwc', subT);
     invT = await ipcRenderer.invoke('nwc', invT);
+    // taxT = await ipcRenderer.invoke('nwc', taxT)
     setInvoiceSubtotal(subT);
     setInvoiceTaxes(taxT);
     setInvoiceTotal(invT);
@@ -248,6 +253,10 @@ function Qty({ inputNum, setInputNum }) {
       />
     </Grid>
   );
+}
+Qty.propTypes = {
+  inputNum: PropTypes.string,
+  setInputNum: PropTypes.func
 }
 
 function Alert(props) {

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types'
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -18,9 +19,9 @@ function ccyFormat(num) {
   return `${num.toFixed(2)}`;
 }
 
-function subtotal(items) {
-  return items.map(({ price }) => price).reduce((sum, i) => sum + i, 0);
-}
+// function subtotal(items) {
+//   return items.map(({ price }) => price).reduce((sum, i) => sum + i, 0);
+// }
 
 export default function SpanningTable(props) {
   const classes = useStyles();
@@ -65,11 +66,11 @@ export default function SpanningTable(props) {
             <TableCell align="right">{invoiceSubtotal}</TableCell>
           </TableRow>
           <TableRow>
-            <TableCell>الضريبة</TableCell>
-            <TableCell align="right">{`${(TAX_RATE * 100).toFixed(
+            <TableCell>التتخفيض</TableCell>
+            <TableCell align="right">{`${(TAX_RATE * -100).toFixed(
               0
             )} %`}</TableCell>
-            <TableCell align="right">{ccyFormat(invoiceTaxes)}</TableCell>
+            <TableCell align="right">{ccyFormat(invoiceTaxes * -1)}</TableCell>
           </TableRow>
           <TableRow>
             <TableCell colSpan={2}>المجموع النهائي</TableCell>
@@ -80,4 +81,13 @@ export default function SpanningTable(props) {
       </Table>
     </TableContainer>
   );
+}
+
+
+SpanningTable.propTypes = {
+  state: PropTypes.arrayOf(PropTypes.object),
+  invoiceSubtotal: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  invoiceTaxes: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  invoiceTotal: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  TAX_RATE: PropTypes.number.isRequired
 }

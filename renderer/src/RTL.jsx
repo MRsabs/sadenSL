@@ -11,6 +11,7 @@ export default function RTL({ children }) {
   return <StylesProvider jss={jss}>{children}</StylesProvider>;
 }
 
-RTL.prototype = {
+RTL.propTypes = {
   name: PropTypes.arrayOf(PropTypes.element),
+  children: PropTypes.element
 };

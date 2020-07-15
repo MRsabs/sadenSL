@@ -22,7 +22,7 @@ export async function testDb(): Promise<boolean> {
       name: 'prodcut 1',
       wholeSalePrice: 100,
       retailPrice: 200,
-      barcode: 11111111,
+      barcode: 1,
     });
     await models.Inventory.create({
       trackerId: inventory.getDataValue('id'),
@@ -33,7 +33,7 @@ export async function testDb(): Promise<boolean> {
       name: 'prodcut 2',
       wholeSalePrice: 2100,
       retailPrice: 2200,
-      barcode: 22222222,
+      barcode: 2,
     });
     await models.Inventory.create({
       trackerId: inventory.getDataValue('id'),

@@ -19,6 +19,15 @@ module.exports = {
   module: {
     rules: [
       {
+        enforce: 'pre',
+        test: /\.jsx$/,
+        exclude: /node_modules/,
+        loader: 'eslint-loader',
+        options: {
+          fix: true,
+        },
+      },
+      {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: {
@@ -44,6 +53,7 @@ module.exports = {
   resolve: {
     extensions: ['.wasm', '.js', '.jsx', '.json'],
     alias: {
+      'react-dom': '@hot-loader/react-dom',
       '@utils': path.join(__dirname, './src/utils'),
       '@contexts': path.join(__dirname, './src/contexts'),
     },

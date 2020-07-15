@@ -15,13 +15,17 @@ module.exports = {
     filename: 'index_bundle.js',
     publicPath: './',
   },
-  devServer: {
-    historyApiFallback: true,
-    contentBase: './dist',
-    hot: true,
-  },
   module: {
     rules: [
+      {
+        enforce: 'pre',
+        test: /\.jsx$/,
+        exclude: /node_modules/,
+        loader: 'eslint-loader',
+        options: {
+          fix: true,
+        },
+      },
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,

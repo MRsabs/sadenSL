@@ -15,6 +15,9 @@ module.exports = {
     historyApiFallback: true,
     contentBase: './dist',
     hot: true,
+    watchOptions: {
+      ignored: path.resolve(__dirname, './node_modules')
+    }
   },
   module: {
     rules: [

@@ -1,5 +1,5 @@
 node_modules
 renderer
-build
+cli
 addon
 webpack.config.*

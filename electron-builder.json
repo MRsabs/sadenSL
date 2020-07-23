@@ -21,10 +21,20 @@
     "!**/{npm-debug.log,yarn.lock,.yarn-integrity,.yarn-metadata.json}"
   ],
   "linux": {
-    "target": ["deb", "rpm", "AppImage"]
+    "target": [
+      {
+        "target": "AppImage",
+        "arch": ["x64"]
+      }
+    ]
   },
   "win": {
-    "target": ["nsis"]
+    "target": [
+      {
+        "target": "nsis",
+        "arch": ["x64"]
+      }
+    ]
   },
   "directories": {
     "buildResources": "assets",

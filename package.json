@@ -14,9 +14,9 @@
   "scripts": {
     "start": "webpack --env=dev",
     "build": "webpack --env=prod",
-    "native:dev": "cross-env NODE_ENV=development node build/buildNative.js",
-    "native:prod": "cross-env NODE_ENV=production node build/buildNative.js",
-    "native:dep": "electron-builder install-app-deps",
+    "build-rust:dev": "cross-env NODE_ENV=development node build/buildNative.js",
+    "build-rust:prod": "cross-env NODE_ENV=production node build/buildNative.js",
+    "build:dep": "electron-builder install-app-deps",
     "pack:linux": "cross-env TARGET=linux node cli/finalBuild.js",
     "pack:win": "cross-env TARGET=win node cli/finalBuild.js"
   },

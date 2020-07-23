@@ -8,7 +8,7 @@ const sequelize = new Sequelize({
   logging: false,
   dialect: 'sqlite',
   storage: isDev
-    ? path.join(process.cwd(), 'tmp', `dev.sadensl.sqlite`)
+    ? path.join(process.cwd(), 'tmp', `dev.sadensel.sqlite`)
     : path.join(app.getPath('userData'), 'sadensl.sqlite'),
 });
 

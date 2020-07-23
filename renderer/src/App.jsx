@@ -8,6 +8,7 @@ import Storage from './components/storage/Storage';
 import Home from './components/Home';
 import StorageContextProvider from '@contexts/StorageContext';
 import Casher from './components/casher/Casher';
+import Product from './components/product/main';
 
 const drawerWidth = 240;
 
@@ -97,7 +98,7 @@ export default function App() {
               </StorageContextProvider>
             </Route>
             <Route exact path="/products">
-              <h1>products</h1>
+              <Product />
             </Route>
             <Route exact path="/help">
               <h1>help</h1>

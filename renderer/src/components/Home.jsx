@@ -10,7 +10,8 @@ export default class Home extends Component {
     super()
     this.state = {
       sales: [0, 0, 0, 0, 0, 0, 0, 0],
-      test: 'ksamk',
+      chartsTitle: ['مبيعات اليوم', 'مبيعات الاسبوع', 'مبيعات الشهر', 'مبيعات السنه'],
+      cardsTitle: ['المبيعات', 'كميه المنتجات المباعه', 'عدد الوصولات', 'الارباح', 'اخرى', 'اخرى', 'اخرى', 'اخرى'],
     };
   }
   async componentDidMount() {
@@ -30,12 +31,12 @@ export default class Home extends Component {
         <Grid container spacing={4}>
           {this.state.sales.map((val, i) => (
             <Grid key={i} item xs={3}>
-              <SimpleCard title="المبيعات اليوم" amount={val} />
+              <SimpleCard title={this.state.cardsTitle[i]} amount={val} />
             </Grid>
           ))}
-          {[1, 2, 3, 4, 5, 6].map((val, i) => (
-            <Grid key={i} item xs={4}>
-              <LineChart chartTitle="المبيعات هذا الاسبوع" />
+          {[1, 2, 3, 4].map((val, i) => (
+            <Grid key={i} item xs={6}>
+              <LineChart chartTitle={this.state.chartsTitle[i]} />
             </Grid>
           ))}
         </Grid>

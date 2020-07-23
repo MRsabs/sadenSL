@@ -8,19 +8,21 @@ interface productCreate {
   retailPrice: number;
   quantity: number;
   trackerId: string;
+  barcode: string
 }
 
 ipcMain.handle(
-  'prodcut/create',
+  'product/create',
   async (
     e,
-    { name, wholeSalePrice, retailPrice, quantity, trackerId }: productCreate
+    { name, wholeSalePrice, retailPrice, quantity, barcode, trackerId }: productCreate
   ) => {
     try {
       const product = await models.Product.create({
         name,
         wholeSalePrice,
         retailPrice,
+        barcode
       });
       await models.Inventory.create({
         productId: product.getDataValue('id'),

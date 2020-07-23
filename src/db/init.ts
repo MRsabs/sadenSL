@@ -8,7 +8,7 @@ const sequelize = new Sequelize({
   logging: false,
   dialect: 'sqlite',
   storage: isDev
-    ? path.join(process.cwd(), 'tmp', 'sadensl.sqlite')
+    ? path.join(process.cwd(), 'tmp', `dev.sadensl.sqlite`)
     : path.join(app.getPath('userData'), 'sadensl.sqlite'),
 });
 
@@ -96,7 +96,11 @@ export async function testDb(): Promise<boolean> {
 export async function syncDb(): Promise<boolean> {
   try {
     await import('./models/index');
-    await sequelize.sync({ alter: { drop: false } });
+
+    isDev
+      ? await sequelize.sync({ alter: { drop: true } })
+      : await sequelize.sync({ alter: { drop: false } });
+
     return true;
   } catch (error) {
     // TODO log erro to a file

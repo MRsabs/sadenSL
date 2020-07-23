@@ -11,14 +11,13 @@
   "private": "true",
   "repository": "https://github.com/MRsabS/sadanSL",
   "scripts": {
-    "start": "electron dist/main.js",
-    "bundle:dev": "webpack --env=dev",
-    "bundle:prod": "webpack --env=prod",
+    "start": "webpack --env=dev",
+    "build": "webpack --env=prod",
     "native:dev": "cross-env NODE_ENV=development node build/buildNative.js",
     "native:prod": "cross-env NODE_ENV=production node build/buildNative.js",
     "native:dep": "electron-builder install-app-deps",
-    "pack:linux": "cross-env TARGET=linux node build/finalBuild.js",
-    "pack:win": "cross-env TARGET=win node build/finalBuild.js"
+    "pack:linux": "cross-env TARGET=linux node cli/finalBuild.js",
+    "pack:win": "cross-env TARGET=win node cli/finalBuild.js"
   },
   "devDependencies": {
     "@types/leveldown": "^4.0.2",
@@ -49,12 +48,14 @@
     "webpack-node-externals": "^1.7.2"
   },
   "dependencies": {
+    "@types/shortid": "0.0.29",
     "electron-better-ipc": "^1.1.0",
     "electron-is-dev": "^1.2.0",
     "electron-store": "^5.2.0",
     "leveldown": "^5.6.0",
     "levelup": "^4.4.0",
     "sequelize": "^6.2.2",
+    "shortid": "^2.2.15",
     "sqlite3": "^5.0.0"
   }
 }

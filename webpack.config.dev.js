@@ -1,5 +1,8 @@
 const Path = require('path');
 const fs = require('fs-extra');
+const ElectronReloadPlugin = require('webpack-electron-reload')({
+  path: Path.join(__dirname, './dist/main.js'),
+});
 const nodeExternals = require('webpack-node-externals');
 if (fs.existsSync(Path.resolve(__dirname, './tmp'))) {
   fs.removeSync(Path.resolve(__dirname, './tmp'));
@@ -13,6 +16,9 @@ module.exports = {
   externals: [nodeExternals()],
   target: 'electron-main',
   entry: Path.join(__dirname, './src/main.ts'),
+  plugins: [
+    ElectronReloadPlugin()
+],
   module: {
     rules: [
       {

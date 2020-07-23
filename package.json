@@ -1,5 +1,6 @@
 {
   "name": "sadensel",
+  "description": "Sadan-sel Helps You Manage Your Retail store",
   "version": "0.2.0",
   "main": "dist/main.js",
   "author": {

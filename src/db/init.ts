@@ -1,15 +1,24 @@
 import path = require('path');
 import { app } from 'electron';
+import fs from 'fs-extra'
 import isDev = require('electron-is-dev');
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const Sequelize = require('sequelize');
+
+// for dev
+if (isDev) {
+  const db = path.join(process.cwd(), 'tmp', `dev.sadensel.sqlite`);
+  if (fs.existsSync(db)) {
+    fs.removeSync(db);
+  }
+}
 
 const sequelize = new Sequelize({
   logging: false,
   dialect: 'sqlite',
   storage: isDev
     ? path.join(process.cwd(), 'tmp', `dev.sadensel.sqlite`)
-    : path.join(app.getPath('userData'), 'sadensl.sqlite'),
+    : path.join(app.getPath('userData'), 'sadensel.sqlite'),
 });
 
 export async function testDb(): Promise<boolean> {
@@ -96,11 +105,7 @@ export async function testDb(): Promise<boolean> {
 export async function syncDb(): Promise<boolean> {
   try {
     await import('./models/index');
-
-    isDev
-      ? await sequelize.sync({ alter: { drop: true } })
-      : await sequelize.sync({ alter: { drop: false } });
-
+    await sequelize.sync({ alter: { drop: false } });
     return true;
   } catch (error) {
     // TODO log erro to a file

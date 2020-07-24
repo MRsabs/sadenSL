@@ -23,6 +23,7 @@ app.whenReady().then(async () => {
       // await import('./ipc/helpers');
       // await (await import('./ipc/db/index')).default();
       (await import('./ipc/initIpc')).default();
+      await import('./updater/main');
       // await import('./store/storeDb');
     } else {
       const errorBox = (await import('./helpers/error')).default;

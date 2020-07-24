@@ -39,5 +39,10 @@
   "directories": {
     "buildResources": "assets",
     "output": "package"
+  },
+  "publish": {
+    "provider": "generic",
+    "url": "http://localhost:3005",
+    "channel": "stable"
   }
 }

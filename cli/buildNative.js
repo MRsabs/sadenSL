@@ -4,13 +4,34 @@ const Path = require('path');
 
 const addonDir = Path.join(__dirname, '../addon');
 const addonFile = Path.join(__dirname, '../addon/native/index.node');
-const addonDirElectron = Path.join(__dirname, '../src/util/native/');
 const addonFileElectron = Path.join(__dirname, '../src/util/index.node');
 
-spawn.sync('npm', ['run', process.env.NODE_ENV], {
-  stdio: 'inherit',
-  cwd: addonDir,
-});
+function main(env = process.env.NODE_ENV) {
+  switch (env) {
+    case 'development':
+      build('dev');
+      break;
+    case 'production':
+      build('build');
 
-fs.removeSync(addonFileElectron);
-fs.copySync(addonFile, addonFileElectron);
+      break;
+    default:
+      console.error('unknown ENV: ' + env);
+      process.exit(1);
+  }
+  moveFiles()
+}
+
+function moveFiles() {
+  fs.removeSync(addonFileElectron);
+  fs.copySync(addonFile, addonFileElectron);
+}
+
+function build(forEnv) {
+  spawn.sync('npm', ['run', forEnv], {
+    stdio: 'inherit',
+    cwd: addonDir,
+  });
+}
+
+module.exports = main;

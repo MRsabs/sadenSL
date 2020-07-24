@@ -4,9 +4,6 @@ const ElectronReloadPlugin = require('webpack-electron-reload')({
   path: Path.join(__dirname, './dist/main.js'),
 });
 const nodeExternals = require('webpack-node-externals');
-if (fs.existsSync(Path.resolve(__dirname, './tmp'))) {
-  fs.removeSync(Path.resolve(__dirname, './tmp'));
-}
 
 module.exports = {
   mode: 'development',

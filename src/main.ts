@@ -5,11 +5,7 @@ import createWindow from './helpers/createWindow';
 
 app.whenReady().then(async () => {
   try {
-    if (
-      (await db.authenticateDb()) &&
-      (await db.syncDb()) &&
-      (await db.testDb())
-    ) {
+    if ((await db.authenticateDb()) && (await db.syncDb())) {
       const window = createWindow({
         width: 1280,
         height: 720,

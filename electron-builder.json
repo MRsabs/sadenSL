@@ -3,6 +3,7 @@
   "productName": "Saden-sel",
   "copyright": "Copyright © 2020 Qatara LLC",
   "asar": true,
+  "generateUpdatesFilesForAllChannels": true,
   "files": [
     "**/*",
     "!{renderer,addon,tmp,build,src,.vscode}/**/*",
@@ -43,6 +44,6 @@
   "publish": {
     "provider": "generic",
     "url": "http://localhost:3005",
-    "channel": "stable"
+    "channel": "latest"
   }
 }

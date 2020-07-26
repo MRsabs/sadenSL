@@ -2,6 +2,9 @@
 import { autoUpdater } from 'electron-updater';
 import { ipcMain } from 'electron';
 
+autoUpdater.autoDownload = false;
+autoUpdater.channel = 'latest'
+
 autoUpdater.on('error', (err) => {
   console.log(err);
 });
@@ -23,11 +26,11 @@ autoUpdater.on('update-downloaded', (data) => {
   console.log('update-downloaded');
 });
 
-ipcMain.handle('checking-for-update', () => {
-  autoUpdater
-    .checkForUpdates()
-    .then((val) => {
-      console.log('this is from check method\n', val);
-    })
-    .catch((err) => console.error(err));
+ipcMain.handle('checking-for-update', async () => {
+    try {
+      const value = await  autoUpdater.checkForUpdates()
+      return value;
+    } catch (error) {
+      return error;
+    }
 });

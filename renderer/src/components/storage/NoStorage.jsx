@@ -7,10 +7,13 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { Typography, Grid } from '@material-ui/core';
+import { ipcRenderer } from 'electron';
+import { StorageContext } from '@contexts/StorageContext';
 
 export default function NoStorage() {
   const [open, setOpen] = React.useState(false);
   const [name, setName] = React.useState('');
+  const { dispatch } = React.useContext(StorageContext);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -22,9 +25,20 @@ export default function NoStorage() {
 
   // eslint-disable-next-line no-unused-vars
   const createStorage = () => {
-    // TODO
+    ipcRenderer
+      .invoke('inventory/create', name)
+      .then(() => setName(''))
+      .then(() => handleClose())
+      .then(() => {
+        ipcRenderer.invoke('inventory/read/all').then((data) => {
+          dispatch({
+            type: 'sync',
+            payload: data,
+          });
+        });
+      })
+      .catch(() => console.error('did not create'));
   };
-
   return (
     <div>
       <Grid
@@ -70,7 +84,7 @@ export default function NoStorage() {
               <Button onClick={handleClose} color="primary">
                 الغاء
               </Button>
-              <Button onClick={handleClose} color="primary">
+              <Button onClick={createStorage} color="primary">
                 انشاء
               </Button>
             </DialogActions>

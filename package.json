@@ -17,7 +17,9 @@
     "build:addon": "cross-env NODE_ENV=development node build/buildNative.js",
     "build:dep": "electron-builder install-app-deps",
     "pack:linux": "cross-env TARGET=linux node cli/package.js",
-    "pack:windows": "cross-env TARGET=windows node cli/package.js"
+    "pack:windows": "cross-env TARGET=windows node cli/package.js",
+    "pack": "cross-env TARGET=all node cli/package.js"
+
   },
   "devDependencies": {
     "@types/leveldown": "^4.0.2",

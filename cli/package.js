@@ -1,19 +1,17 @@
-const fs = require('fs-extra');
 const spawn = require('cross-spawn');
 const Path = require('path');
 
 const renderer = Path.join(__dirname, '../renderer');
 const main = Path.join(__dirname, '../');
-const addon = Path.join(__dirname, '../addon')
 
-clean()
+clean();
 
 switch (process.env.TARGET) {
   case 'linux':
     buildRust();
     buildRenderer();
     buildMain();
-    packForLinux()
+    packForLinux();
     break;
 
   case 'windows':
@@ -21,6 +19,13 @@ switch (process.env.TARGET) {
     buildRenderer();
     buildMain();
     packForWindows();
+    break;
+
+  case 'all':
+    buildRust();
+    buildRenderer();
+    buildMain();
+    packAll();
     break;
 
   default:
@@ -54,15 +59,18 @@ function packForWindows() {
 }
 
 function packForLinux() {
-  npxRun(['electron-builder', 'build', '-l'], main);
+  npxRun(['electron-builder', 'build', '-l', '-c.compression=store'], main);
+}
+
+function packAll() {
+  npxRun(['electron-builder', 'build', '-l', '-w'], main);
 }
 
 function buildRust() {
-  // npmRun(['build'], addon);
-  const build = require('./buildNative')
-  build('production')
+  const build = require('./buildNative');
+  build('production');
 }
 
 function clean() {
-  require('./clean')()
+  require('./clean')();
 }

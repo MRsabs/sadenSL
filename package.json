@@ -1,7 +1,7 @@
 {
   "name": "sadensel",
   "description": "Sadan-sel Helps You Manage Your Retail store",
-  "version": "0.2.0",
+  "version": "0.2.0-beta",
   "main": "dist/main.js",
   "author": {
     "email": "info@qatara.com",

@@ -2,7 +2,7 @@ import { autoUpdater } from 'electron-updater';
 import { ipcMain } from 'electron';
 
 autoUpdater.autoDownload = false;
-autoUpdater.channel = 'latest';
+autoUpdater.channel = 'beta';
 
 autoUpdater.on('error', (err) => {
   console.log(err);

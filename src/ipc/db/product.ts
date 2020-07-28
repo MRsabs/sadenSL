@@ -2,27 +2,25 @@ import { ipcMain } from 'electron';
 // import { nwc, unixNow } from '../util/native';
 import * as models from '../../db/models/index';
 
-interface productCreate {
-  name: string;
-  wholeSalePrice: string;
-  retailPrice: number;
-  quantity: number;
-  trackerId: string;
-  barcode: string
-}
-
 ipcMain.handle(
   'product/create',
   async (
-    e,
-    { name, wholeSalePrice, retailPrice, quantity, barcode, trackerId }: productCreate
+    _e,
+    {
+      name,
+      wholeSalePrice,
+      retailPrice,
+      quantity,
+      barcode,
+      trackerId,
+    }: productInfo
   ) => {
     try {
       const product = await models.Product.create({
         name,
         wholeSalePrice,
         retailPrice,
-        barcode
+        barcode,
       });
       await models.Inventory.create({
         productId: product.getDataValue('id'),
@@ -36,7 +34,7 @@ ipcMain.handle(
   }
 );
 
-ipcMain.handle('product/read', async (e, id: string) => {
+ipcMain.handle('product/read', async (_e, id: string) => {
   try {
     const product = await models.Product.findOne({
       where: {
@@ -49,7 +47,7 @@ ipcMain.handle('product/read', async (e, id: string) => {
   }
 });
 
-ipcMain.handle('product/read/barcode', async (e, barcode: string) => {
+ipcMain.handle('product/read/barcode', async (_e, barcode: string) => {
   try {
     const product = await models.Product.findOne({
       where: {
@@ -66,17 +64,27 @@ ipcMain.handle('product/read/barcode', async (e, barcode: string) => {
   }
 });
 
-// ipcMain.handle('product/update', async (e, id: string) => {
-//   try {
-//     await models.Inventory.update(
-//       { quantityInStock: newQuantity },
-//       {
-//         where: {
-//           productId: orderProduct.getDataValue('productId'),
-//         },
-//       }
-//     );
-//   } catch (error) {
-//     return false;
-//   }
-// });
+ipcMain.handle(
+  'product/update',
+  async (_e, productId: string, opt: productInfo) => {
+    try {
+      await models.Inventory.update(opt, {
+        where: {
+          productId,
+        },
+      });
+    } catch (error) {
+      return false;
+    }
+  }
+);
+
+// types
+interface productInfo {
+  name: string;
+  wholeSalePrice: string;
+  retailPrice: number;
+  quantity: number;
+  trackerId: string;
+  barcode: string;
+}

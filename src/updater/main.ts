@@ -20,7 +20,7 @@ autoUpdater.on('download-progress', (data) => {
   console.log('download-in-progress\n', data);
 });
 
-autoUpdater.on('update-downloaded', (data) => {
+autoUpdater.on('update-downloaded', () => {
   console.log('update-downloaded');
   autoUpdater.quitAndInstall();
 });

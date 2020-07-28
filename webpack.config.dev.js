@@ -1,20 +1,22 @@
 const Path = require('path');
-const fs = require('fs-extra');
+const WebpackBar = require('webpackbar');
+const nodeExternals = require('webpack-node-externals');
 const ElectronReloadPlugin = require('webpack-electron-reload')({
   path: Path.join(__dirname, './dist/main.js'),
 });
-const nodeExternals = require('webpack-node-externals');
 
 module.exports = {
   mode: 'development',
   node: {
     __dirname: false,
   },
+  devtool: 'source-map',
   externals: [nodeExternals()],
   target: 'electron-main',
   entry: Path.join(__dirname, './src/main.ts'),
   plugins: [
-    ElectronReloadPlugin()
+    ElectronReloadPlugin(),
+    new WebpackBar({name: 'Electron-Main'})
 ],
   module: {
     rules: [

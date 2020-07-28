@@ -1,4 +1,5 @@
 const HtmlWebPackPlugin = require('html-webpack-plugin');
+const WebpackBar = require('webpackbar');
 const path = require('path');
 
 module.exports = {
@@ -52,6 +53,7 @@ module.exports = {
       template: './src/index.html',
       filename: './index.html',
     }),
+    new WebpackBar({name: 'Electron-Renderer'})
   ],
   resolve: {
     extensions: ['.wasm', '.js', '.jsx', '.json'],

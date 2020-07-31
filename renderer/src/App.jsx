@@ -9,7 +9,7 @@ import Home from './components/Home';
 import StorageContextProvider from '@contexts/StorageContext';
 import Casher from './components/casher/Casher';
 import Product from './components/product/main';
-import Info from './components/help/Info'
+import Info from './components/help/Info';
 
 const drawerWidth = 240;
 
@@ -77,7 +77,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function App() {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(true);
   return (
     <Router>
       <div className={classes.root}>

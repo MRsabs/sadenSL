@@ -7,11 +7,21 @@ import { ipcRenderer } from 'electron';
 
 export default class Home extends Component {
   constructor() {
-    super()
+    super();
     this.state = {
-      sales: [0, 0, 0, 0, 0, 0, 0, 0],
-      chartsTitle: ['مبيعات اليوم', 'مبيعات الاسبوع', 'مبيعات الشهر', 'مبيعات السنه'],
-      cardsTitle: ['المبيعات', 'كميه المنتجات المباعه', 'عدد الوصولات', 'الارباح', 'اخرى', 'اخرى', 'اخرى', 'اخرى'],
+      sales: [0, 0, 0, 0],
+      chartsTitle: [
+        'مبيعات اليوم',
+        'مبيعات الاسبوع',
+        'مبيعات الشهر',
+        'مبيعات السنه',
+      ],
+      cardsTitle: [
+        'المبيعات',
+        'كميه المنتجات المباعه',
+        'عدد الوصولات',
+        'الارباح',
+      ],
     };
   }
   async componentDidMount() {
@@ -27,7 +37,7 @@ export default class Home extends Component {
   }
   render() {
     return (
-      <Container maxWidth="lg">
+      <Container maxWidth="xl">
         <Grid container spacing={4}>
           {this.state.sales.map((val, i) => (
             <Grid key={i} item xs={3}>

@@ -51,6 +51,7 @@
     "webpackbar": "^4.0.0"
   },
   "dependencies": {
+    "dinero.js": "^1.8.1",
     "electron-better-ipc": "^1.1.0",
     "electron-is-dev": "^1.2.0",
     "electron-store": "^5.2.0",

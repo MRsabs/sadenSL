@@ -11,6 +11,7 @@
     "@material-ui/lab": "^4.0.0-alpha.56",
     "chart.js": "^2.9.3",
     "clsx": "^1.1.1",
+    "dinero.js": "^1.8.1",
     "electron": "^9.0.5",
     "history": "^5.0.0",
     "jss": "^10.3.0",

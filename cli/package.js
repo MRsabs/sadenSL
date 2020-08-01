@@ -1,5 +1,6 @@
 const spawn = require('cross-spawn');
 const Path = require('path');
+const fs = require('fs-extra');
 
 const renderer = Path.join(__dirname, '../renderer');
 const main = Path.join(__dirname, '../');
@@ -26,6 +27,13 @@ switch (process.env.TARGET) {
     buildRenderer();
     buildMain();
     packAll();
+    break;
+
+  case 'test':
+    buildRust(true);
+    buildRenderer();
+    buildMain();
+    packForLinux(true);
     break;
 
   default:
@@ -58,17 +66,39 @@ function packForWindows() {
   npxRun(['electron-builder', 'build', '-w'], main);
 }
 
-function packForLinux() {
-  npxRun(['electron-builder', 'build', '-l', '-c.compression=store'], main);
+function packForLinux(test = false) {
+  if (test) {
+    const buildConfig = Path.join(__dirname, '../electron-builder.json');
+    const tmpConfig = Path.join(__dirname, './tmp.json');
+    const arrConfig = [
+      'electron-builder',
+      'build',
+      '--dir',
+      '-c.compression=store',
+      '--config',
+      tmpConfig,
+    ];
+    const testConfig = JSON.parse(fs.readFileSync(buildConfig).toString());
+    testConfig.asar = false;
+    fs.writeFileSync(tmpConfig, JSON.stringify(testConfig));
+    npxRun(arrConfig, main);
+    fs.removeSync(tmpConfig);
+  } else {
+    npxRun(['electron-builder', 'build', '-l'], main);
+  }
 }
 
 function packAll() {
   npxRun(['electron-builder', 'build', '-l', '-w'], main);
 }
 
-function buildRust() {
+function buildRust(test = false) {
   const build = require('./buildNative');
-  build('production');
+  if (test) {
+    build('development');
+  } else {
+    build('production');
+  }
 }
 
 function clean() {

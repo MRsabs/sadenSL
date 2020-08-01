@@ -6,7 +6,7 @@
   "generateUpdatesFilesForAllChannels": true,
   "files": [
     "**/*",
-    "!{renderer,addon,tmp,build,src,.vscode}/**/*",
+    "!{renderer,addon,tmp,cli,build,src,.vscode}/**/*",
     "!**/webpack.*",
     "!**/{.eslintignore,.eslintrc.json,.prettierrc,tsconfig.json,README.md}",
     "!**/node_modules/*/{CHANGELOG.md,README.md,README,readme.md,readme}",

@@ -6,6 +6,10 @@ const addonDir = Path.join(__dirname, '../addon');
 const addonFile = Path.join(__dirname, '../addon/native/index.node');
 const addonFileElectron = Path.join(__dirname, '../src/util/index.node');
 
+if (require.main === module) {
+  main();
+}
+
 function main(env = process.env.NODE_ENV) {
   switch (env) {
     case 'development':
@@ -19,7 +23,7 @@ function main(env = process.env.NODE_ENV) {
       console.error('unknown ENV: ' + env);
       process.exit(1);
   }
-  moveFiles()
+  moveFiles();
 }
 
 function moveFiles() {

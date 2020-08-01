@@ -10,6 +10,7 @@ import StorageContextProvider from '@contexts/StorageContext';
 import Casher from './components/casher/Casher';
 import Product from './components/product/main';
 import Info from './components/help/Info';
+import GlobalContextProvider from '@contexts/GlobalContext';
 
 const drawerWidth = 240;
 
@@ -80,39 +81,41 @@ export default function App() {
   const [open, setOpen] = React.useState(true);
   return (
     <Router>
-      <div className={classes.root}>
-        <CssBaseline />
-        <Appbar title="سدنـسيل" open={open} setOpen={setOpen} />
-        <Sidebar open={open} setOpen={setOpen} />
-        <main className={classes.content}>
-          <div className={classes.toolbar} />
-          <Switch>
-            <Route exact path="/casher">
-              <Casher />
-            </Route>
-            <Route exact path="/reports">
-              <Home />
-            </Route>
-            <Route path="/storage">
-              <StorageContextProvider>
-                <Storage />
-              </StorageContextProvider>
-            </Route>
-            <Route exact path="/products">
-              <Product />
-            </Route>
-            <Route exact path="/help">
-              <Info />
-            </Route>
-            <Route exact path="/">
-              <h1>root</h1>
-            </Route>
-            <Route>
-              <h1>Page not Found</h1>
-            </Route>
-          </Switch>
-        </main>
-      </div>
+      <GlobalContextProvider>
+        <div className={classes.root}>
+          <CssBaseline />
+          <Appbar title="سدنـسيل" open={open} setOpen={setOpen} />
+          <Sidebar open={open} setOpen={setOpen} />
+          <main className={classes.content}>
+            <div className={classes.toolbar} />
+            <Switch>
+              <Route exact path="/casher">
+                <Casher />
+              </Route>
+              <Route exact path="/reports">
+                <Home />
+              </Route>
+              <Route path="/storage">
+                <StorageContextProvider>
+                  <Storage />
+                </StorageContextProvider>
+              </Route>
+              <Route exact path="/products">
+                <Product />
+              </Route>
+              <Route exact path="/help">
+                <Info />
+              </Route>
+              <Route exact path="/">
+                <h1>root</h1>
+              </Route>
+              <Route>
+                <h1>Page not Found</h1>
+              </Route>
+            </Switch>
+          </main>
+        </div>
+      </GlobalContextProvider>
     </Router>
   );
 }

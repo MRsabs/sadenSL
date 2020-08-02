@@ -10,14 +10,12 @@
   "dependencies": {
     "@babel/runtime": "^7.10.3",
     "antd": "^4.5.1",
-    "chart.js": "^2.9.3",
     "clsx": "^1.1.1",
     "custom-electron-titlebar": "^3.2.3",
     "dinero.js": "^1.8.1",
     "electron": "^9.0.5",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
-    "react-chartjs-2": "^2.9.0",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
     "styled-components": "^5.1.1"

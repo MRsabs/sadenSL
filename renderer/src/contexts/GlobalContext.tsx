@@ -1,7 +1,6 @@
 import React, { createContext, useReducer } from 'react';
-import PropTypes from 'prop-types';
 
-export const GlobalContext = createContext();
+export const GlobalContext = createContext({});
 
 const GlobalContextReducer = (state, action) => {
   switch (action.type) {
@@ -13,7 +12,9 @@ const GlobalContextReducer = (state, action) => {
   }
 };
 
-function GlobalContextProvider(props) {
+function GlobalContextProvider(props: {
+  children: React.ReactNode;
+}): JSX.Element {
   const [global, setGlobal] = useReducer(GlobalContextReducer, {
     hasStorage: false,
   });
@@ -23,9 +24,5 @@ function GlobalContextProvider(props) {
     </GlobalContext.Provider>
   );
 }
-
-GlobalContextProvider.propTypes = {
-  children: PropTypes.element,
-};
 
 export default GlobalContextProvider;

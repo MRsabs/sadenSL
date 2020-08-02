@@ -1,8 +1,6 @@
 import React, { createContext, useReducer } from 'react';
-import PropTypes from 'prop-types'
 
-
-export const StorageContext = createContext();
+export const StorageContext = createContext({});
 
 const storageReducer = (state, action) => {
   switch (action.type) {
@@ -13,7 +11,9 @@ const storageReducer = (state, action) => {
   }
 };
 
-const StorageContextProvider = (props) => {
+const StorageContextProvider = (props: {
+  children: React.ReactNode;
+}): JSX.Element => {
   const [storage, dispatch] = useReducer(storageReducer, {
     count: 0,
     rows: [],
@@ -27,7 +27,3 @@ const StorageContextProvider = (props) => {
 };
 
 export default StorageContextProvider;
-
-StorageContextProvider.propTypes = {
-  children: PropTypes.element.isRequired
-};

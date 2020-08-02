@@ -2,7 +2,7 @@
   "scripts": {
     "start": "webpack-dev-server --env=dev",
     "build": "webpack --env=prod",
-    "lint": "eslint ./src**/*.js --fix"
+    "lint": "eslint ./src**/*.{js,ts,tsx,jsx} --fix"
   },
   "resolutions": {
     "styled-components": "^5"

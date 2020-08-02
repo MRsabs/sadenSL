@@ -1,3 +1,4 @@
+/* eslint-disable */
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const WebpackBar = require('webpackbar');
 const path = require('path');
@@ -7,7 +8,7 @@ if (fs.existsSync(path.join(__dirname, '../dist/renderer'))) {
 }
 
 module.exports = {
-  entry: path.resolve(__dirname, './src/index.jsx'),
+  entry: path.resolve(__dirname, './src/index.tsx'),
   mode: 'production',
   target: 'electron-renderer',
   devtool: 'eval',
@@ -19,19 +20,28 @@ module.exports = {
   module: {
     rules: [
       {
-        enforce: 'pre',
-        test: /\.jsx$/,
-        exclude: /node_modules/,
-        loader: 'eslint-loader',
-        options: {
-          fix: true,
-        },
-      },
-      {
-        test: /\.(js|jsx)$/,
+        test: /\.(j|t)sx?$/,
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
+          options: {
+            cacheDirectory: true,
+            babelrc: false,
+            presets: [
+              [
+                '@babel/preset-env',
+                { targets: { browsers: 'last 2 versions' } }, // or whatever your project requires
+              ],
+              ['@babel/preset-typescript', { onlyRemoveTypeImports: true }],
+              '@babel/preset-react',
+            ],
+            plugins: [
+              // plugin-proposal-decorators is only needed if you're using experimental decorators in TypeScript
+              ['@babel/plugin-proposal-decorators', { legacy: true }],
+              ['@babel/plugin-proposal-class-properties', { loose: true }],
+              'react-hot-loader/babel',
+            ],
+          },
         },
       },
       {
@@ -42,6 +52,10 @@ module.exports = {
           },
         ],
       },
+      {
+        test: /\.css$/i,
+        use: ['style-loader', 'css-loader'],
+      },
     ],
   },
   plugins: [
@@ -49,13 +63,18 @@ module.exports = {
       template: './src/index.html',
       filename: './index.html',
     }),
-    new WebpackBar({name: 'Electron-Renderer'})
+    new WebpackBar({ name: 'Electron-Renderer' }),
+    new ForkTsCheckerWebpackPlugin({
+      eslint: {
+        files: './src/**/*.{ts,tsx,js,jsx}',
+      },
+    }),
   ],
   resolve: {
-    extensions: ['.wasm', '.js', '.jsx', '.json'],
+    plugins: [new TsconfigPathsPlugin({})],
+    extensions: ['.tsx', '.wasm', '.js', '.jsx', '.json'],
     alias: {
-      '@utils': path.join(__dirname, './src/utils'),
-      '@contexts': path.join(__dirname, './src/contexts'),
+      'react-dom': '@hot-loader/react-dom',
     },
   },
 };

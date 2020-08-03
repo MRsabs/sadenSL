@@ -14,13 +14,13 @@ const storageReducer = (state, action) => {
 const StorageContextProvider = (props: {
   children: React.ReactNode;
 }): JSX.Element => {
-  const [storage, dispatch] = useReducer(storageReducer, {
+  const [state, dispatch] = useReducer(storageReducer, {
     count: 0,
     rows: [],
   });
 
   return (
-    <StorageContext.Provider value={{ storage, dispatch }}>
+    <StorageContext.Provider value={{ state, dispatch }}>
       {props.children}
     </StorageContext.Provider>
   );

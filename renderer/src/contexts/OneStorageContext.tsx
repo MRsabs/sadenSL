@@ -1,6 +1,6 @@
 import React, { createContext, useReducer } from 'react';
 
-export const OneStorageContext = createContext({});
+export const OneStorageContext = createContext(null);
 
 const oneStorageReducer = (state, action) => {
   switch (action.type) {
@@ -14,9 +14,9 @@ const oneStorageReducer = (state, action) => {
 const OneStorageContextProvider = (props: {
   children: React.ReactNode;
 }): JSX.Element => {
-  const [oneStorage, dispatch] = useReducer(oneStorageReducer, [{}]);
+  const [state, dispatch] = useReducer(oneStorageReducer, [{}]);
   return (
-    <OneStorageContext.Provider value={{ oneStorage, dispatch }}>
+    <OneStorageContext.Provider value={{ state, dispatch }}>
       {props.children}
     </OneStorageContext.Provider>
   );

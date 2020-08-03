@@ -1,11 +1,11 @@
 import React, { createContext, useReducer } from 'react';
 
-export const GlobalContext = createContext({});
+export const GlobalContext = createContext(null);
 
-const GlobalContextReducer = (state, action) => {
-  switch (action.type) {
-    case 'set':
-      return state;
+const GlobalContextReducer = (state, { type, payload }) => {
+  switch (type) {
+    case 'hasStorage':
+      return { ...state, [type]: payload };
 
     default:
       return state;
@@ -15,11 +15,11 @@ const GlobalContextReducer = (state, action) => {
 function GlobalContextProvider(props: {
   children: React.ReactNode;
 }): JSX.Element {
-  const [global, setGlobal] = useReducer(GlobalContextReducer, {
+  const [state, dispatch] = useReducer(GlobalContextReducer, {
     hasStorage: false,
   });
   return (
-    <GlobalContext.Provider value={{ global, setGlobal }}>
+    <GlobalContext.Provider value={{ state, dispatch }}>
       {props.children}
     </GlobalContext.Provider>
   );

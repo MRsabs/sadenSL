@@ -1,6 +1,6 @@
 import React, { createContext, useReducer } from 'react';
 
-export const StorageContext = createContext({});
+export const StorageContext = createContext(null);
 
 const storageReducer = (state, action) => {
   switch (action.type) {

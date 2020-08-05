@@ -54,7 +54,8 @@ export async function testDb(): Promise<boolean> {
       const inventory = await models.InventoryTracker.create({
         inventoryName: 'test storage',
       });
-      [1, 2, 3, 4, 5].map(async (val, i) => {
+      const lenArr = new Array(100).fill(0)
+      lenArr.map(async (val, i) => {
         const product = await models.Product.create({
           name: i % 2 === 0 ? 'prodcut even' + i : 'prodcut odd' + i,
           wholeSalePrice: 100,

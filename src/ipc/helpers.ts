@@ -1,15 +1,14 @@
 import { ipcMain } from 'electron-better-ipc';
 import { nwc, unixNow } from '../util/native';
+import * as models from '../db/models/index';
 
 ipcMain.handle('nwc', (e, x: string | number): string => {
-  console.log('x is: ', x)
-
   function towDesimlsNum(x: string | number): string {
-    const num = Number(x)
+    const num = Number(x);
     if (num % 1 != 0) {
-      return num.toFixed(2).toString()
+      return num.toFixed(2).toString();
     } else {
-      return num.toString() + '.00'
+      return num.toString() + '.00';
     }
   }
 
@@ -38,4 +37,20 @@ ipcMain.handle('unixNow', async () => {
 ipcMain.handle('hello', async () => {
   console.log('hello IPC IS CALLED');
   return 'hello from main';
+});
+
+ipcMain.on('app/init', async (e) => {
+  const info = {
+    hasStorage: false,
+  };
+
+  (await storageCount()) === 0
+    ? (info.hasStorage = true)
+    : (info.hasStorage = false);
+
+  e.returnValue = info;
+  async function storageCount(): Promise<number> {
+    const data = await models.InventoryTracker.findAndCountAll();
+    return data.count;
+  }
 });

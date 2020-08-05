@@ -3,6 +3,7 @@ sadensl.sqlite
 src/util/index.node
 renderer/node_modules
 renderer/dist
+renderer/components
 addon/node_modules
 addon/native/index.node
 addon/native/target

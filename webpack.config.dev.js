@@ -43,4 +43,7 @@ module.exports = {
     extensions: ['.wasm', '.js', '.ts', '.json', '.node'],
   },
   watch: true,
+  watchOptions: {
+    ignored: /node_modules/
+  }
 };

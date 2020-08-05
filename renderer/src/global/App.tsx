@@ -17,7 +17,12 @@ function AppLayout(): JSX.Element {
   return (
     <>
       {/* <Layout style={{ minHeight: 'calc(100vh - 30px)' }}> */}
-      <Layout style={{ minHeight: 'calc(100vh - 0px)' }}>
+      <Layout
+        style={{
+          minHeight: 'calc(100vh - 0px)',
+          maxHeight: 'calc(100vh - 0px)',
+        }}
+      >
         <Header className="header">
           <div
             style={{

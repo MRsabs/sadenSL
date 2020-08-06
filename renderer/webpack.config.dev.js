@@ -91,7 +91,7 @@ module.exports = {
   ],
   resolve: {
     plugins: [new TsconfigPathsPlugin({})],
-    extensions: ['.tsx', '.wasm', '.js', '.jsx', '.json'],
+    extensions: ['.ts', '.tsx', '.js', '.jsx', '.wasm', '.json'],
     alias: {
       'react-dom': '@hot-loader/react-dom',
     },

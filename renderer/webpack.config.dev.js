@@ -1,11 +1,12 @@
-const HtmlWebPackPlugin = require('html-webpack-plugin');
-const WebpackBar = require('webpackbar');
 const path = require('path');
+const WebpackBar = require('webpackbar');
+const WasmPackPlugin = require('@wasm-tool/wasm-pack-plugin');
+const HtmlWebPackPlugin = require('html-webpack-plugin');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
 module.exports = {
-  entry: path.resolve(__dirname, './src/index.tsx'),
+  entry: path.resolve(__dirname, './src/index.ts'),
   mode: 'development',
   target: 'electron-renderer',
   devtool: 'source-map',
@@ -32,15 +33,11 @@ module.exports = {
             cacheDirectory: true,
             babelrc: false,
             presets: [
-              [
-                '@babel/preset-env',
-                { targets: { browsers: 'last 2 versions' } }, // or whatever your project requires
-              ],
+              ['@babel/preset-env', { targets: { electron: '9' } }],
               ['@babel/preset-typescript', { onlyRemoveTypeImports: true }],
               '@babel/preset-react',
             ],
             plugins: [
-              // plugin-proposal-decorators is only needed if you're using experimental decorators in TypeScript
               ['@babel/plugin-proposal-decorators', { legacy: true }],
               ['@babel/plugin-proposal-class-properties', { loose: true }],
               'react-hot-loader/babel',
@@ -71,6 +68,16 @@ module.exports = {
     ],
   },
   plugins: [
+    new WasmPackPlugin({
+      crateDirectory: path.resolve(__dirname, './wasm'),
+      args: '--log-level warn',
+      // Default arguments are `--typescript --target browser --mode normal`.
+      // extraArgs: '--version',
+      // The same as the `--out-dir` option for `wasm-pack`
+      outDir: path.resolve(__dirname, './wasm/pkg'),
+      // the mode `production` makes `wasm-pack` build in `release` mode.
+      forceMode: 'development',
+    }),
     new HtmlWebPackPlugin({
       template: './src/index.html',
       filename: './index.html',

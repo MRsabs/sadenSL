@@ -1,9 +1,15 @@
 const Path = require('path');
+const fs = require('fs-extra');
 const WebpackBar = require('webpackbar');
 const nodeExternals = require('webpack-node-externals');
 const ElectronReloadPlugin = require('webpack-electron-reload')({
   path: Path.join(__dirname, './dist/main.js'),
 });
+const distDir = Path.resolve(__dirname, './dist');
+if (distDir) {
+  fs.removeSync(distDir);
+  fs.mkdirSync(distDir);
+}
 
 module.exports = {
   mode: 'development',
@@ -14,10 +20,7 @@ module.exports = {
   externals: [nodeExternals()],
   target: 'electron-main',
   entry: Path.join(__dirname, './src/main.ts'),
-  plugins: [
-    ElectronReloadPlugin(),
-    new WebpackBar({name: 'Electron-Main'})
-],
+  plugins: [ElectronReloadPlugin(), new WebpackBar({ name: 'Electron-Main' })],
   module: {
     rules: [
       {
@@ -43,7 +46,4 @@ module.exports = {
     extensions: ['.wasm', '.js', '.ts', '.json', '.node'],
   },
   watch: true,
-  watchOptions: {
-    ignored: /node_modules/
-  }
 };

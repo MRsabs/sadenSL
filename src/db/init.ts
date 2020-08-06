@@ -1,7 +1,7 @@
-import path = require('path');
+import * as path from 'path';
 import { app } from 'electron';
-import fs from 'fs-extra'
-import isDev = require('electron-is-dev');
+import fs from 'fs-extra';
+import * as isDev from 'electron-is-dev';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const Sequelize = require('sequelize');
 
@@ -54,7 +54,7 @@ export async function testDb(): Promise<boolean> {
       const inventory = await models.InventoryTracker.create({
         inventoryName: 'test storage',
       });
-      const lenArr = new Array(100).fill(0)
+      const lenArr = new Array(100).fill(0);
       lenArr.map(async (val, i) => {
         const product = await models.Product.create({
           name: i % 2 === 0 ? 'prodcut even' + i : 'prodcut odd' + i,

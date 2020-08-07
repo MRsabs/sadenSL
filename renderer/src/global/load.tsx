@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { hot } from 'react-hot-loader/root';
 import { BrowserRouter as Router } from 'react-router-dom';
 import 'antd/dist/antd.css';
-import './index.css';
+import '../index.css';
 import App from './App';
 import Init from './Init';
 import GlobalContextProvider from '@contexts/GlobalContext';

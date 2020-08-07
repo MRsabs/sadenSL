@@ -14,3 +14,9 @@ package
 .cache
 levelDB
 tmp
+renderer/wasm/target
+renderer/wasm/**/*.rs.bk
+renderer/wasm/Cargo.lock
+renderer/wasm/bin/
+renderer/wasm/pkg/
+renderer/wasm/wasm-pack.log

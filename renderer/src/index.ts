@@ -1,2 +1,2 @@
 import('./global/load');
-// test
+// testt

@@ -1,5 +1,5 @@
 mod utils;
-
+use num_format::{Locale, ToFormattedString};
 use wasm_bindgen::prelude::*;
 
 // // When the `wee_alloc` feature is enabled, use `wee_alloc` as the global
@@ -14,6 +14,12 @@ use wasm_bindgen::prelude::*;
 // }
 
 #[wasm_bindgen]
-pub fn greet() -> f64 {
-    return 10 as f64;
+pub fn nwc(number: i32) -> String {
+    let number = number.to_formatted_string(&Locale::en);
+    return number;
 }
+
+// #[wasm_bindgen]
+// pub fn greet() -> f64 {
+//     return 10 as f64;
+// }

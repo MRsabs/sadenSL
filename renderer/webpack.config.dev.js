@@ -72,7 +72,7 @@ module.exports = {
       crateDirectory: path.resolve(__dirname, './wasm'),
       args: '--log-level warn',
       // Default arguments are `--typescript --target browser --mode normal`.
-      // extraArgs: '--version',
+      extraArgs: '--no-typescript',
       // The same as the `--out-dir` option for `wasm-pack`
       outDir: path.resolve(__dirname, './wasm/pkg'),
       // the mode `production` makes `wasm-pack` build in `release` mode.

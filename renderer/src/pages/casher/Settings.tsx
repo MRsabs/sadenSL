@@ -65,14 +65,6 @@ export default function Settings({
   );
 }
 
-interface Props {
-  handleInsertMode: (mode: string) => void;
-  auto: boolean;
-  input: string;
-  onSubmit: () => void;
-  setInput: (input: string) => void;
-}
-
 function MyInput(props: {
   input: string;
   addonBefore: string;
@@ -94,4 +86,12 @@ function MyInput(props: {
       onChange={(e) => props.setInput(e.target.value)}
     />
   );
+}
+
+interface Props {
+  handleInsertMode: (mode: string) => void;
+  auto: boolean;
+  input: string;
+  onSubmit: () => void;
+  setInput: (input: string) => void;
 }

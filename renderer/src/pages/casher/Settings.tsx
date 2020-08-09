@@ -2,7 +2,7 @@ import React from 'react';
 import Row from 'antd/lib/row';
 import Col from 'antd/lib/col';
 import Select from 'antd/lib/select';
-import { Button, Input } from 'antd';
+import { Button, Input, Typography, Switch } from 'antd';
 
 const { Option } = Select;
 
@@ -50,17 +50,19 @@ export default function Settings({
           <h2>Settings: </h2>
         </Col>
         <Col span={24}>
-          <Select
-            defaultValue="none"
-            style={{ width: '100%', margin: '5px 0' }}
-            onChange={handleInsertMode}
-          >
-            <Option value="none" disabled={true}>
-              Select insert mode (default: automatic)
-            </Option>
-            <Option value="automatic">Automatic</Option>
-            <Option value="manual">Manual</Option>
-          </Select>
+          <div>
+            <Typography.Text type={'secondary'}>Insert Mode: </Typography.Text>
+            <Switch
+              onChange={(checked) =>
+                checked
+                  ? handleInsertMode('automatic')
+                  : handleInsertMode('manual')
+              }
+              checkedChildren="Automatic"
+              unCheckedChildren="Manual"
+              defaultChecked
+            />
+          </div>
         </Col>
       </Row>
     </Col>

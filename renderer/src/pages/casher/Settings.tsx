@@ -12,6 +12,8 @@ export default function Settings({
   input,
   onSubmit,
   setInput,
+  inputNum,
+  setInputNum,
 }: Props): JSX.Element {
   return (
     <Col span={8}>
@@ -26,9 +28,9 @@ export default function Settings({
         <MyInput
           addonBefore="Qty"
           auto={auto}
-          input={input}
           onSubmit={onSubmit}
-          setInput={setInput}
+          input={inputNum}
+          setInput={setInputNum}
         />
       ) : null}
       <Row>
@@ -67,10 +69,10 @@ export default function Settings({
 
 function MyInput(props: {
   input: string;
+  setInput: (input: string) => void;
   addonBefore: string;
   auto: boolean;
   onSubmit: () => void;
-  setInput: (input: string) => void;
 }) {
   return (
     <Input
@@ -92,6 +94,8 @@ interface Props {
   handleInsertMode: (mode: string) => void;
   auto: boolean;
   input: string;
-  onSubmit: () => void;
   setInput: (input: string) => void;
+  inputNum: number;
+  setInputNum: (input: number) => void;
+  onSubmit: () => void;
 }

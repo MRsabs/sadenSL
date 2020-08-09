@@ -68,8 +68,8 @@ export default function Settings({
 }
 
 function MyInput(props: {
-  input: string;
-  setInput: (input: string) => void;
+  input: string | number;
+  setInput: (input: string | number) => void;
   addonBefore: string;
   auto: boolean;
   onSubmit: () => void;

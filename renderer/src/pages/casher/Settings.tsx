@@ -26,7 +26,7 @@ export default function Settings({
       />
       {!auto ? (
         <MyInput
-          addonBefore="Qty"
+          addonBefore="Quantity"
           auto={auto}
           onSubmit={onSubmit}
           input={inputNum}

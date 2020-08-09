@@ -35,7 +35,7 @@ export default function Settings({
       ) : null}
       <Row>
         <Col span={12}>
-          <Button size="large" type="primary">
+          <Button onClick={onSubmit} size="large" type="primary">
             Submit Order
           </Button>
         </Col>

@@ -1,10 +1,7 @@
 import React from 'react';
 import Row from 'antd/lib/row';
 import Col from 'antd/lib/col';
-import Select from 'antd/lib/select';
 import { Button, Input, Typography, Switch } from 'antd';
-
-const { Option } = Select;
 
 export default function Settings({
   auto,

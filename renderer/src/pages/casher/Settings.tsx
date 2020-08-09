@@ -2,6 +2,10 @@ import React from 'react';
 import Row from 'antd/lib/row';
 import Col from 'antd/lib/col';
 import { Button, Input, Typography, Switch } from 'antd';
+import { CSSTransition } from 'react-transition-group';
+
+const qtyInputId = 'insert-qty';
+const barcodeInputId = 'insert-barcode';
 
 export default function Settings({
   auto,
@@ -12,24 +16,40 @@ export default function Settings({
   inputNum,
   setInputNum,
 }: Props): JSX.Element {
+  function insertMode(auto: boolean) {
+    if (auto) {
+      handleInsertMode('automatic');
+    } else {
+      handleInsertMode('manual');
+    }
+  }
   return (
     <Col span={8}>
-      <MyInput
-        addonBefore="Barcode"
-        auto={auto}
-        input={input}
-        onSubmit={onSubmit}
-        setInput={setInput}
-      />
-      {!auto ? (
+      <CSSTransition
+        in={!auto}
+        timeout={175}
+        classNames="insert-mode"
+        unmountOnExit
+        onEnter={() => document.getElementById(qtyInputId).focus()}
+        onExited={() => document.getElementById(barcodeInputId).focus()}
+      >
         <MyInput
+          id={qtyInputId}
           addonBefore="Quantity"
           auto={auto}
           onSubmit={onSubmit}
           input={inputNum}
           setInput={setInputNum}
         />
-      ) : null}
+      </CSSTransition>
+      <MyInput
+        id={barcodeInputId}
+        addonBefore="Barcode"
+        auto={auto}
+        input={input}
+        onSubmit={onSubmit}
+        setInput={setInput}
+      />
       <Row>
         <Col span={12}>
           <Button onClick={onSubmit} size="large" type="primary">
@@ -51,9 +71,7 @@ export default function Settings({
             <Typography.Text type={'secondary'}>Insert Mode: </Typography.Text>
             <Switch
               onChange={(checked) =>
-                checked
-                  ? handleInsertMode('automatic')
-                  : handleInsertMode('manual')
+                checked ? insertMode(true) : insertMode(false)
               }
               checkedChildren="Automatic"
               unCheckedChildren="Manual"
@@ -67,6 +85,7 @@ export default function Settings({
 }
 
 function MyInput(props: {
+  id: string;
   input: string | number;
   setInput: (input: string | number) => void;
   addonBefore: string;
@@ -75,6 +94,7 @@ function MyInput(props: {
 }) {
   return (
     <Input
+      id={props.id}
       size="large"
       style={{ margin: '5px 0' }}
       addonBefore={`${props.addonBefore}: `}

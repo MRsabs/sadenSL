@@ -93,6 +93,8 @@ export default function Casher(): JSX.Element {
           handleInsertMode={handleInsertMode}
           input={input}
           setInput={setInput}
+          inputNum={inputNum}
+          setInputNum={setInputNum}
           onSubmit={onSubmit}
         />
       </Row>

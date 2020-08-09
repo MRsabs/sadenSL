@@ -7,13 +7,10 @@ import Col from 'antd/lib/col';
 import Statistic from 'antd/lib/statistic';
 import { ProductData } from '.';
 
-function numberWithCommas(
-  x: number | string,
-  options = { locale: 'en-US', currency: 'IQD' }
-): string {
-  return x.toLocaleString(options.locale, {
-    style: 'currency',
-    currency: options.currency,
+function numberWithCommas(x: number | string, opt: FormatOpitions): string {
+  return Number(x).toLocaleString(opt.locale, {
+    style: opt.options.style || 'en-US',
+    currency: opt.options.currency || 'decimal',
   });
 }
 
@@ -30,7 +27,9 @@ export default function OrderTable(props: Props): JSX.Element {
         dataIndex="unitPrice"
         key="unitPrice"
         render={(value) => {
-          return numberWithCommas(value);
+          return numberWithCommas(value, {
+            options: { currency: 'IQD', style: 'currency' },
+          });
         }}
       />
       <ColumnGroup title="Order Details">
@@ -38,13 +37,20 @@ export default function OrderTable(props: Props): JSX.Element {
           title="Units Ordered"
           dataIndex="unitsOrdered"
           key="unitsOrdered"
+          render={(value) => {
+            return numberWithCommas(value, {
+              options: { currency: 'IQD', style: 'decimal' },
+            });
+          }}
         />
         <Column
           title="Total Units Price"
           dataIndex="totalUnitsPrice"
           key="totalUnitsPrice"
           render={(value) => {
-            return numberWithCommas(value);
+            return numberWithCommas(value, {
+              options: { currency: 'IQD', style: 'currency' },
+            });
           }}
         />
       </ColumnGroup>
@@ -57,11 +63,19 @@ interface Props {
   invoiceSubtotal: number;
 }
 
+interface FormatOpitions {
+  locale?: string;
+  options: Intl.NumberFormatOptions;
+}
+
 function OrderTotal(invoiceSubtotal: number): JSX.Element {
+  const total = numberWithCommas(invoiceSubtotal, {
+    options: { currency: 'IQD', style: 'currency' },
+  });
   return (
     <Row gutter={16}>
       <Col span={24}>
-        <Statistic title="Total" value={invoiceSubtotal} />
+        <Statistic title="Total" value={total} />
       </Col>
     </Row>
   );

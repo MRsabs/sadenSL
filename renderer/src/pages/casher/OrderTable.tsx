@@ -7,13 +7,6 @@ import Col from 'antd/lib/col';
 import Statistic from 'antd/lib/statistic';
 import { ProductData } from '.';
 
-function numberWithCommas(x: number | string, opt: FormatOpitions): string {
-  return Number(x).toLocaleString(opt.locale, {
-    style: opt.options.style || 'en-US',
-    currency: opt.options.currency || 'decimal',
-  });
-}
-
 export default function OrderTable(props: Props): JSX.Element {
   return (
     <Table
@@ -63,11 +56,18 @@ interface Props {
   invoiceSubtotal: number;
 }
 
+// TODO make this function global
 interface FormatOpitions {
   locale?: string;
-  options: Intl.NumberFormatOptions;
+  options?: Intl.NumberFormatOptions;
 }
 
+function numberWithCommas(
+  x: number | string,
+  opt: FormatOpitions = { locale: 'en-US', options: { style: 'decimal' } }
+): string {
+  return Number(x).toLocaleString(opt.locale, { ...opt.options });
+}
 function OrderTotal(invoiceSubtotal: number): JSX.Element {
   const total = numberWithCommas(invoiceSubtotal, {
     options: { currency: 'IQD', style: 'currency' },

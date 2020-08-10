@@ -3,7 +3,7 @@ async function initIpc(): Promise<boolean> {
     await Promise.all([
       import('./dev/fakeDb'),
       import('./db/inventory'),
-      import('./db//product'),
+      import('./db/index'),
       import('./helpers'),
     ]);
     return true;

@@ -5,6 +5,19 @@ import { ipcRenderer } from 'electron';
 import OrderTable from './OrderTable';
 import Settings from './Settings';
 
+// TODO make this function global
+interface FormatOpitions {
+  locale?: string;
+  options?: Intl.NumberFormatOptions;
+}
+
+function numberWithCommas(
+  x: number | string,
+  opt: FormatOpitions = { locale: 'en-US', options: { style: 'decimal' } }
+): string {
+  return Number(x).toLocaleString(opt.locale, { ...opt.options });
+}
+
 function subtotal(items: ProductData[]) {
   return items
     .map(({ totalUnitsPrice }) => totalUnitsPrice)
@@ -35,19 +48,37 @@ export default function Casher(): JSX.Element {
   const [invoiceSubtotal, setInvoiceSubtotal] = React.useState(0);
   const [state, setState] = React.useState<ProductData[]>([]);
   const [input, setInput] = React.useState('');
-  const [inputNum, setInputNum] = React.useState(1);
+  const [inputNum, setInputNumState] = React.useState<string>('');
+
+  const parseInputNum = (): number => {
+    return Number(inputNum.replace(/,/g, ''));
+  };
+
+  const setInputNum = (value: string | number) => {
+    console.log(value, typeof value);
+    const parseSting = (value as string).replace(/,/g, '');
+    const isNumber = Number(parseSting);
+    if (isNumber) {
+      const formated = numberWithCommas(parseSting);
+      setInputNumState(formated);
+    } else {
+      setInputNumState(inputNum);
+    }
+  };
 
   const onSubmit = async () => {
+    function clearInputs(): void {
+      setInput('');
+      setInputNumState('');
+    }
     const data = await ipcRenderer.invoke('product/read/barcode', input.trim());
     if (data === null) {
-      setInput('');
-      setInputNum(1);
-      return;
+      return clearInputs();
     }
     const newState = [];
 
     let newRow = true;
-    const orderQty = inputNum ? inputNum : 1;
+    const orderQty = inputNum ? parseInputNum() : 1;
     const row = createRow(data.name, orderQty, data.retailPrice);
     if (state.length === 0) {
       newState.push(row);
@@ -71,8 +102,7 @@ export default function Casher(): JSX.Element {
     setInvoiceSubtotal(subT);
     setState(newState as ProductData[]);
 
-    setInput('');
-    setInputNum(1);
+    clearInputs();
   };
 
   const handleInsertMode = (mode: string) => {

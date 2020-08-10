@@ -114,7 +114,7 @@ interface Props {
   auto: boolean;
   input: string;
   setInput: (input: string) => void;
-  inputNum: number;
+  inputNum: string;
   setInputNum: (input: number) => void;
   onSubmit: () => void;
 }

@@ -105,8 +105,15 @@ export async function testDb(): Promise<boolean> {
 
 export async function syncDb(): Promise<boolean> {
   try {
-    await import('./models/index');
+    const models = await import('./models/index');
     await sequelize.sync({ alter: { drop: false } });
+
+    const isGuestExist = await models.Customer.findOne({
+      where: { id: 'guest' },
+    });
+    if (!isGuestExist) {
+      await models.Customer.create({ name: 'guest', id: 'guest' });
+    }
     return true;
   } catch (error) {
     // TODO log erro to a file

@@ -58,6 +58,9 @@ function AppLayout(): JSX.Element {
               <Menu.Item icon={<UserOutlined />} key="/storage">
                 Storage
               </Menu.Item>
+              <Menu.Item icon={<UserOutlined />} key="/orders">
+                Orders
+              </Menu.Item>
               <SubMenu key="sub2" icon={<LaptopOutlined />} title="My Profile">
                 <Menu.Item key="5">option5</Menu.Item>
                 <Menu.Item key="6">option6</Menu.Item>

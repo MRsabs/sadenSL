@@ -3,14 +3,15 @@ import { Switch, Route } from 'react-router-dom';
 import { Result } from 'antd';
 import Storage from 'src/pages/storage';
 import Casher from 'src/pages/casher';
+import Orders from '@pages/orders/Order';
 export default function App(): JSX.Element {
   return (
     <Switch>
       <Route exact path="/casher">
         <Casher />
       </Route>
-      <Route exact path="/reports">
-        <h1>Home</h1>
+      <Route exact path="/orders">
+        <Orders />
       </Route>
       <Route path="/storage">
         <Storage />

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { app } from 'electron';
+import { app, Menu } from 'electron';
 import * as db from './db/init';
 import createWindow from './helpers/createWindow';
 
@@ -16,6 +16,7 @@ app.whenReady().then(async () => {
           nodeIntegrationInWorker: true,
         },
       });
+      window.maximize();
       window.webContents.on('dom-ready', () => window.show());
       // await import('./ipc/helpers');
       // await (await import('./ipc/db/index')).default();

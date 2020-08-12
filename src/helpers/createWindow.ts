@@ -24,5 +24,5 @@ function loadDevTools(window: BrowserWindow) {
   );
   window.webContents.session
     .loadExtension(ReactDevTool)
-    .catch((err) => console.error(err));
+    .catch(() => console.error('error loading exntention'));
 }

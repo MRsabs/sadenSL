@@ -1,5 +1,6 @@
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const WebpackBar = require('webpackbar');
+const WasmPackPlugin = require('@wasm-tool/wasm-pack-plugin');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const path = require('path');
@@ -9,7 +10,7 @@ if (fs.existsSync(path.join(__dirname, '../dist/renderer'))) {
 }
 
 module.exports = {
-  entry: path.resolve(__dirname, './src/index.tsx'),
+  entry: path.resolve(__dirname, './src/index.ts'),
   mode: 'production',
   target: 'electron-renderer',
   devtool: 'eval',
@@ -68,6 +69,16 @@ module.exports = {
     ],
   },
   plugins: [
+    new WasmPackPlugin({
+      crateDirectory: path.resolve(__dirname, './wasm'),
+      args: '--log-level warn',
+      // Default arguments are `--typescript --target browser --mode normal`.
+      extraArgs: '--no-typescript',
+      // The same as the `--out-dir` option for `wasm-pack`
+      outDir: path.resolve(__dirname, './wasm/pkg'),
+      // the mode `production` makes `wasm-pack` build in `release` mode.
+      forceMode: 'production',
+    }),
     new HtmlWebPackPlugin({
       template: './src/index.html',
       filename: './index.html',

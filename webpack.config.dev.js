@@ -1,6 +1,7 @@
 const Path = require('path');
 const fs = require('fs-extra');
 const WebpackBar = require('webpackbar');
+const CleanTerminalPlugin = require('clean-terminal-webpack-plugin');
 const nodeExternals = require('webpack-node-externals');
 const ElectronReloadPlugin = require('webpack-electron-reload')({
   path: Path.join(__dirname, './dist/main.js'),
@@ -20,7 +21,11 @@ module.exports = {
   externals: [nodeExternals()],
   target: 'electron-main',
   entry: Path.join(__dirname, './src/main.ts'),
-  plugins: [ElectronReloadPlugin(), new WebpackBar({ name: 'Electron-Main' })],
+  plugins: [
+    ElectronReloadPlugin(),
+    new WebpackBar({ name: 'Electron-Main' }),
+    new CleanTerminalPlugin(),
+  ],
   module: {
     rules: [
       {

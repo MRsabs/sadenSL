@@ -69,9 +69,8 @@ export async function testDb(): Promise<boolean> {
         });
       });
     })();
-    const customer = await models.Customer.create({ name: 'guest' });
     const order = await models.Order.create({
-      customerId: customer.getDataValue('id'),
+      customerId: 'guest',
     });
     const orderProduct = await models.OrderProduct.create({
       orderId: order.getDataValue('id'),
@@ -105,15 +104,9 @@ export async function testDb(): Promise<boolean> {
 
 export async function syncDb(): Promise<boolean> {
   try {
-    const models = await import('./models/index');
+    await import('./models/index');
     await sequelize.sync({ alter: { drop: false } });
-
-    const isGuestExist = await models.Customer.findOne({
-      where: { id: 'guest' },
-    });
-    if (!isGuestExist) {
-      await models.Customer.create({ name: 'guest', id: 'guest' });
-    }
+    await checkGuest();
     return true;
   } catch (error) {
     // TODO log erro to a file
@@ -130,6 +123,16 @@ export async function authenticateDb(): Promise<boolean> {
     // TODO log erro to a file
     console.error('database did not authenticate');
     return false;
+  }
+}
+
+async function checkGuest(): Promise<void> {
+  const models = await import('./models/index');
+  const isGuestExist = await models.Customer.findOne({
+    where: { id: 'guest' },
+  });
+  if (!isGuestExist) {
+    await models.Customer.create({ name: 'guest', id: 'guest' });
   }
 }
 

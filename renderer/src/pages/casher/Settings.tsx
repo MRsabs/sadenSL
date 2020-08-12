@@ -15,6 +15,7 @@ export default function Settings({
   setInput,
   inputNum,
   setInputNum,
+  submitOrder,
 }: Props): JSX.Element {
   function insertMode(auto: boolean) {
     if (auto) {
@@ -51,14 +52,19 @@ export default function Settings({
         setInput={setInput}
       />
       <Row>
-        <Col span={12}>
+        <Col span={8}>
           <Button onClick={onSubmit} size="large" type="primary">
-            Submit Order
+            Add to Order
           </Button>
         </Col>
-        <Col span={12}>
+        <Col style={{ display: 'flex' }} span={8}>
           <Button size="large" type="primary">
             Cancel Order
+          </Button>
+        </Col>
+        <Col span={8}>
+          <Button onClick={submitOrder} size="large" type="primary">
+            Submit Order
           </Button>
         </Col>
       </Row>
@@ -115,6 +121,7 @@ interface Props {
   input: string;
   setInput: (input: string) => void;
   inputNum: string;
-  setInputNum: (input: number) => void;
+  setInputNum: (input: string) => void;
   onSubmit: () => void;
+  submitOrder: () => void;
 }

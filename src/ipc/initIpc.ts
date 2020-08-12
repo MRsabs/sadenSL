@@ -1,11 +1,12 @@
+const dbIpc = [
+  import('./db/inventory'),
+  import('./db/product'),
+  import('./db/order'),
+];
+
 async function initIpc(): Promise<boolean> {
   try {
-    await Promise.all([
-      import('./dev/fakeDb'),
-      import('./db/inventory'),
-      import('./db/index'),
-      import('./helpers'),
-    ]);
+    await Promise.all([...dbIpc, import('./dev/fakeDb'), import('./helpers')]);
     return true;
   } catch (error) {
     return false;

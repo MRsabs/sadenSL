@@ -1,6 +1,7 @@
 import React, { useLayoutEffect, useState } from 'react';
 import { Table as AntTable } from 'antd';
 import { ColumnsType } from 'antd/es/table';
+import { ProductsInfo } from '@contexts/OneStorageContext';
 
 function getContentSectionHeight(): number {
   return document.querySelector('#root > section > section > section > main')
@@ -19,6 +20,10 @@ const columns: ColumnsType<Product> = [
     dataIndex: 'name',
     sorter: (a, b) => a.name.length - b.name.length,
     sortDirections: ['descend', 'ascend'],
+  },
+  {
+    title: 'Barcode',
+    dataIndex: 'barcode',
   },
   {
     title: 'Retail Price',
@@ -65,6 +70,7 @@ function Table(props: Props): JSX.Element {
         wholeSalePrice: val['product.wholeSalePrice'],
         retailPrice: val['product.retailPrice'],
         quantityInStock: val['quantityInStock'],
+        barcode: val['product.barcode'],
       };
       return res;
     });
@@ -87,23 +93,7 @@ function Table(props: Props): JSX.Element {
 export default Table;
 
 interface Props {
-  data: [
-    {
-      createdAt: number;
-      id: string;
-      'product.barcode': string;
-      'product.createdAt': number;
-      'product.id': string;
-      'product.name': string;
-      'product.retailPrice': number;
-      'product.updatedAt': number;
-      'product.wholeSalePrice': number;
-      productId: string;
-      quantityInStock: number;
-      trackerId: string;
-      updatedAt: number;
-    }
-  ];
+  data: ProductsInfo[];
 }
 
 interface Product {

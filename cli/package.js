@@ -5,40 +5,32 @@ const fs = require('fs-extra');
 const renderer = Path.join(__dirname, '../renderer');
 const main = Path.join(__dirname, '../');
 
-clean();
+if (clean() && process.env.TEST === 'true') {
+  BuildApp(true);
+} else {
+  BuildApp();
+}
 
-switch (process.env.TARGET) {
-  case 'linux':
-    buildRust();
-    buildRenderer();
-    buildMain();
-    packForLinux();
-    break;
+function BuildApp(test = false) {
+  switch (process.platform) {
+    case 'linux':
+      test ? buildRust() : buildRust(true);
+      buildRenderer();
+      buildMain();
+      test ? packForLinux() : packForLinux(true);
+      break;
 
-  case 'windows':
-    buildRust();
-    buildRenderer();
-    buildMain();
-    packForWindows();
-    break;
+    case 'win32':
+      test ? buildRust() : buildRust(true);
+      buildRenderer();
+      buildMain();
+      test ? packForWindows() : packForWindows(true);
+      break;
 
-  case 'all':
-    buildRust();
-    buildRenderer();
-    buildMain();
-    packAll();
-    break;
-
-  case 'test':
-    buildRust(true);
-    buildRenderer();
-    buildMain();
-    packForLinux(true);
-    break;
-
-  default:
-    console.error('unknown target: ' + process.env.TARGET);
-    process.exit(1);
+    default:
+      console.error('un-supported target: ' + process.env.TARGET);
+      process.exit(1);
+  }
 }
 
 function npmRun(commands, cwd) {
@@ -47,6 +39,7 @@ function npmRun(commands, cwd) {
     cwd,
   });
 }
+
 function npxRun(commands, cwd) {
   spawn.sync('npx', [...commands], {
     stdio: 'inherit',
@@ -62,43 +55,35 @@ function buildMain() {
   npmRun(['build'], main);
 }
 
-function packForWindows() {
-  npxRun(['electron-builder', 'build', '-w'], main);
+function testPacked() {
+  const buildConfig = Path.join(__dirname, '../electron-builder.json');
+  const tmpConfig = Path.join(__dirname, './tmp.json');
+  const arrConfig = [
+    'electron-builder',
+    'build',
+    '--dir',
+    '-c.compression=store',
+    '--config',
+    tmpConfig,
+  ];
+  const testConfig = JSON.parse(fs.readFileSync(buildConfig).toString());
+  testConfig.asar = false;
+  fs.writeFileSync(tmpConfig, JSON.stringify(testConfig));
+  npxRun(arrConfig, main);
+  fs.removeSync(tmpConfig);
+}
+
+function packForWindows(test = false) {
+  test ? testPacked() : npxRun(['electron-builder', 'build', '-w'], main);
 }
 
 function packForLinux(test = false) {
-  if (test) {
-    const buildConfig = Path.join(__dirname, '../electron-builder.json');
-    const tmpConfig = Path.join(__dirname, './tmp.json');
-    const arrConfig = [
-      'electron-builder',
-      'build',
-      '--dir',
-      '-c.compression=store',
-      '--config',
-      tmpConfig,
-    ];
-    const testConfig = JSON.parse(fs.readFileSync(buildConfig).toString());
-    testConfig.asar = false;
-    fs.writeFileSync(tmpConfig, JSON.stringify(testConfig));
-    npxRun(arrConfig, main);
-    fs.removeSync(tmpConfig);
-  } else {
-    npxRun(['electron-builder', 'build', '-l'], main);
-  }
-}
-
-function packAll() {
-  npxRun(['electron-builder', 'build', '-l', '-w'], main);
+  test ? testPacked() : npxRun(['electron-builder', 'build', '-l'], main);
 }
 
 function buildRust(test = false) {
   const build = require('./buildNative');
-  if (test) {
-    build('development');
-  } else {
-    build('production');
-  }
+  test ? build('development') : build('production');
 }
 
 function clean() {

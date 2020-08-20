@@ -29,6 +29,18 @@ Product.init(
       type: DataTypes.NUMBER,
       defaultValue: 0,
     },
+    ProductionDate: {
+      type: DataTypes.NUMBER,
+      defaultValue: 0,
+    },
+    expirationDate: {
+      type: DataTypes.NUMBER,
+      defaultValue: 0,
+    },
+    notes: {
+      type: DataTypes.STRING,
+      defaultValue: '',
+    },
     createdAt: {
       type: 'TIMESTAMP',
       defaultValue() {

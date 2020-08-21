@@ -5,7 +5,8 @@ const fs = require('fs-extra');
 const renderer = Path.join(__dirname, '../renderer');
 const main = Path.join(__dirname, '../');
 
-if (clean() && process.env.TEST === 'true') {
+clean();
+if (process.env.TEST === 'true') {
   BuildApp({ testing: true });
 } else {
   BuildApp({ testing: false });

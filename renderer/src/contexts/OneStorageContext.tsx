@@ -42,6 +42,9 @@ export interface ProductsInfo {
   'product.retailPrice': number;
   'product.updatedAt': number;
   'product.wholeSalePrice': number;
+  'product.productionDate': number;
+  'product.expirationDate': number;
+  notes: string;
   productId: string;
   quantityInStock: number;
   trackerId: string;

@@ -10,7 +10,9 @@
       "@utils/*": ["./src/utils/*"],
       "@contexts/*": ["./src/contexts/*"],
       "@pages/*": ["./src/pages/*"],
-      "@wasm": ["./wasm/pkg/index.js"]
+      "@wasm": ["./wasm/pkg/index.js"],
+      "@components": ["./src/components"],
+      "@api": ["./src/api"]
     }
   },
   "include": ["src/**/*"],

@@ -32,6 +32,9 @@ export async function testDb(): Promise<boolean> {
       wholeSalePrice: 100,
       retailPrice: 200,
       barcode: 1,
+      productionDate: 1597999139,
+      expirationDate: 1597999139,
+      notes: 'this is a test note',
     });
     await models.Inventory.create({
       trackerId: inventory.getDataValue('id'),
@@ -43,6 +46,9 @@ export async function testDb(): Promise<boolean> {
       wholeSalePrice: 2100,
       retailPrice: 2200,
       barcode: 2,
+      productionDate: 1597999139,
+      expirationDate: 1597999139,
+      notes: 'this is a test note',
     });
     await models.Inventory.create({
       trackerId: inventory.getDataValue('id'),
@@ -61,6 +67,9 @@ export async function testDb(): Promise<boolean> {
           wholeSalePrice: 100,
           retailPrice: 200,
           barcode: 46152 * i,
+          productionDate: 1597999139,
+          expirationDate: 1597999139,
+          notes: 'this is a test note',
         });
         await models.Inventory.create({
           trackerId: inventory.getDataValue('id'),

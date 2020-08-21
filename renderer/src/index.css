@@ -13,6 +13,9 @@ body {
   background: #fff;
 }
 
+td {
+  white-space: pre;
+}
 /* .logo::after {
   content: 'ahmed';
 } */

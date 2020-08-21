@@ -29,7 +29,7 @@ Product.init(
       type: DataTypes.NUMBER,
       defaultValue: 0,
     },
-    ProductionDate: {
+    productionDate: {
       type: DataTypes.NUMBER,
       defaultValue: 0,
     },

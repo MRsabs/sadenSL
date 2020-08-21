@@ -4,11 +4,14 @@ import { StorageContext } from '@contexts/StorageContext';
 import ShowData from './ShowData/ShowData';
 import { OneStorageContext } from '@contexts/OneStorageContext';
 import { ipcRenderer } from 'electron';
+import { StorageComponentContext } from './Context';
 
 const { Option } = Select;
 
 export default function StorageManger(): JSX.Element {
   const { dispatch } = useContext(OneStorageContext);
+  const StorageComponentContextDispatch = useContext(StorageComponentContext)
+    .dispatch;
   const { state } = useContext(StorageContext);
   const [spinner, setSpinner] = useState(false);
   const [storageSelectd, SetStorageSelectd] = useState(false);
@@ -16,7 +19,14 @@ export default function StorageManger(): JSX.Element {
   function selectdStorage() {
     SetStorageSelectd(true);
   }
-  function onChange(storageId: string) {
+  function onChange(
+    storageId: string,
+    option: { key: string; children: string; value: string }
+  ) {
+    StorageComponentContextDispatch({
+      type: 'setStorage',
+      payload: { name: option.children, id: option.value },
+    });
     setSpinner(true);
     fetchDataForStroage(storageId);
     selectdStorage();

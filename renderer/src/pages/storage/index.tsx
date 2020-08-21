@@ -4,6 +4,7 @@ import { ipcRenderer } from 'electron';
 import NoStorage from './noStorage/NoStorage';
 import StorageManger from './StorageManger';
 import OneStorageContextProvider from '@contexts/OneStorageContext';
+import StorageComponentContextProvider from './Context';
 
 export default function Storage(): JSX.Element {
   const { state, dispatch } = useContext(StorageContext);
@@ -26,7 +27,9 @@ export default function Storage(): JSX.Element {
 function StorageMangerWithContext(): JSX.Element {
   return (
     <OneStorageContextProvider>
-      <StorageManger />
+      <StorageComponentContextProvider>
+        <StorageManger />
+      </StorageComponentContextProvider>
     </OneStorageContextProvider>
   );
 }

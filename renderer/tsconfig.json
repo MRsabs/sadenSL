@@ -12,7 +12,7 @@
       "@pages/*": ["./src/pages/*"],
       "@wasm": ["./wasm/pkg/index.js"],
       "@components": ["./src/components"],
-      "@api": ["./src/api"]
+      "@api/*": ["./src/api/*"]
     }
   },
   "include": ["src/**/*"],

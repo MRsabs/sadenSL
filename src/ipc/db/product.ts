@@ -2,14 +2,16 @@ import { ipcMain } from 'electron';
 // import { nwc, unixNow } from '../util/native';
 import * as models from '../../db/models/index';
 
-ipcMain.handle(
+ipcMain.on(
   'product/create',
   async (
-    _e,
+    e,
     {
       name,
       wholeSalePrice,
       retailPrice,
+      dateTime,
+      notes,
       quantity,
       barcode,
       trackerId,
@@ -21,15 +23,18 @@ ipcMain.handle(
         wholeSalePrice,
         retailPrice,
         barcode,
+        notes,
+        productionDate: dateTime[0],
+        expirationDate: dateTime[1],
       });
       await models.Inventory.create({
         productId: product.getDataValue('id'),
         quantityInStock: quantity,
         trackerId,
       });
-      return true;
+      e.returnValue = true;
     } catch (error) {
-      return false;
+      e.returnValue = false;
     }
   }
 );
@@ -82,9 +87,12 @@ ipcMain.handle(
 // types
 interface productInfo {
   name: string;
-  wholeSalePrice: string;
-  retailPrice: number;
-  quantity: number;
-  trackerId: string;
   barcode: string;
+  quantity: number;
+  dateTime: number[];
+  retailPrice: number;
+  wholeSalePrice: number;
+  type: string;
+  trackerId: string;
+  notes: string;
 }

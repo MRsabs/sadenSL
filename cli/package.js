@@ -6,25 +6,29 @@ const renderer = Path.join(__dirname, '../renderer');
 const main = Path.join(__dirname, '../');
 
 if (clean() && process.env.TEST === 'true') {
-  BuildApp(true);
+  BuildApp({ testing: true });
 } else {
-  BuildApp();
+  BuildApp({ testing: false });
 }
 
-function BuildApp(test = false) {
+function BuildApp({ testing }) {
   switch (process.platform) {
     case 'linux':
-      test ? buildRust() : buildRust(true);
+      testing ? buildRust({ testing: true }) : buildRust({ testing: false });
       buildRenderer();
       buildMain();
-      test ? packForLinux() : packForLinux(true);
+      testing
+        ? packForLinux({ testing: false })
+        : packForLinux({ testing: true });
       break;
 
     case 'win32':
-      test ? buildRust() : buildRust(true);
+      testing ? buildRust({ testing: true }) : buildRust({ testing: false });
       buildRenderer();
       buildMain();
-      test ? packForWindows() : packForWindows(true);
+      testing
+        ? packForWindows({ testing: false })
+        : packForWindows({ testing: true });
       break;
 
     default:
@@ -73,17 +77,17 @@ function testPacked() {
   fs.removeSync(tmpConfig);
 }
 
-function packForWindows(test = false) {
-  test ? testPacked() : npxRun(['electron-builder', 'build', '-w'], main);
+function packForWindows({ testing }) {
+  testing ? testPacked() : npxRun(['electron-builder', 'build', '-w'], main);
 }
 
-function packForLinux(test = false) {
-  test ? testPacked() : npxRun(['electron-builder', 'build', '-l'], main);
+function packForLinux({ testing }) {
+  testing ? testPacked() : npxRun(['electron-builder', 'build', '-l'], main);
 }
 
-function buildRust(test = false) {
+function buildRust({ testing }) {
   const build = require('./buildNative');
-  test ? build('development') : build('production');
+  testing ? build('development') : build('production');
 }
 
 function clean() {

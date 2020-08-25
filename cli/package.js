@@ -18,8 +18,8 @@ function BuildApp({ testing }) {
       buildRenderer();
       buildMain();
       testing
-        ? packForLinux({ testing: false })
-        : packForLinux({ testing: true });
+        ? packForLinux({ testing: true })
+        : packForLinux({ testing: false });
       break;
 
     case 'win32':
@@ -27,8 +27,8 @@ function BuildApp({ testing }) {
       buildRenderer();
       buildMain();
       testing
-        ? packForWindows({ testing: false })
-        : packForWindows({ testing: true });
+        ? packForLinux({ testing: true })
+        : packForLinux({ testing: false });
       break;
 
     default:

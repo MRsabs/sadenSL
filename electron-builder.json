@@ -1,6 +1,6 @@
 {
-  "appId": "com.electron.qatara.sadensl",
-  "productName": "Sadensl",
+  "appId": "com.qatara.sadensel",
+  "productName": "sadensel",
   "copyright": "Copyright © 2020 Qatara LLC",
   "asar": true,
   "generateUpdatesFilesForAllChannels": true,

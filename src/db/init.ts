@@ -1,7 +1,7 @@
 import * as path from 'path';
 import { app } from 'electron';
 import fs from 'fs-extra';
-import * as isDev from 'electron-is-dev';
+import isDev from 'electron-is-dev';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const Sequelize = require('sequelize');
 

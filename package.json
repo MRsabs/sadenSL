@@ -10,7 +10,6 @@
   },
   "license": "LicenseRef-LICENSE",
   "private": "true",
-  "repository": "https://github.com/MRsabS/sadanSL",
   "scripts": {
     "start": "webpack --env=dev",
     "build": "webpack --env=prod",

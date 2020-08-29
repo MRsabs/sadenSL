@@ -6,7 +6,7 @@ import isDev from 'electron-is-dev';
 export default function createWindow(
   winOpt: Electron.BrowserWindowConstructorOptions
 ): Electron.BrowserWindow {
-  const mainWindow = new BrowserWindow(winOpt);
+  const mainWindow = new BrowserWindow({...winOpt, icon: path.join(__dirname, '../assets/icons/icon-512x512.png')});
   if (isDev) {
     mainWindow.loadURL('http://localhost:8080');
     mainWindow.webContents.openDevTools();

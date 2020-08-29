@@ -11,7 +11,7 @@ module.exports = {
   target: 'electron-renderer',
   devtool: 'source-map',
   output: {
-    filename: 'index_bundle.js',
+    filename: 'script.js',
     publicPath: '/',
   },
   devServer: {

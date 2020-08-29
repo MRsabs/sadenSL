@@ -16,8 +16,8 @@ app.whenReady().then(async () => {
           nodeIntegrationInWorker: true,
         },
       });
-      window.maximize();
       window.webContents.on('dom-ready', () => window.show());
+      window.maximize();
       // await import('./ipc/helpers');
       // await (await import('./ipc/db/index')).default();
       (await import('./ipc/initIpc')).default();
